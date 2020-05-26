@@ -1,0 +1,10 @@
+#frontend
+
+./frontend/node_modules
+
+#backend
+
+.backend/.settings
+.backend/target
+.backend/.classpath
+.backend/.project

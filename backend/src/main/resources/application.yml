@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: 'flashcards'
+  datasource:
+    url: jdbc:postgresql://localhost:5432/flashcards
+    username: postgres
+    password: admin
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  jpa:
+    show-sql: true
+    properties:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update #drop n create table again, good for testing, comment this in production
+
+jwt:
+  token:
+    expiration: 86400000
+    password: a$djs&3jdkg0;djsimxhfn%abd
+    
+management:  endpoints:    web:      exposure:        include:        - auditevents
+        - beans
+        - caches
+        - conditions
+        - configprops
+        - env
+        - flyway
+        - health
+        - heapdump
+        - httptrace
+        - info
+        - integrationgraph
+        - jolokia
+        - logfile
+        - loggers
+        - liquibase
+        - metrics
+        - mappings
+        - prometheus
+        - scheduledtasks
+        - sessions
+        - shutdown
+        - threaddump
+    
