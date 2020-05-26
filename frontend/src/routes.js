@@ -10,6 +10,7 @@ import DeckResultTest from "./pages/DeckResultTest";
 import Menu from "./pages/Menu";
 import Header from "./pages/Header";
 import NewCard from "./pages/NewCard";
+import FlashcardsHeader from "./pages/Flashcards/FlashcardsHeader";
 
 const contentStyle = {
   color: '#2d3142 !important',
@@ -38,6 +39,7 @@ const Routes = () => (
           <Menu></Menu>
           <Switch>
             <PrivateRoute exact path="/deck" component={NewCard}/>
+            <PrivateRoute exact path="/flashcards" component={FlashcardsHeader} />
           </Switch>
         </Header>
 
@@ -47,9 +49,9 @@ const Routes = () => (
           
           <div style={{marginTop: '100px'}}>
             <PrivateRoute exact path="/deck/new" component={NewDeck} />
-            <PrivateRoute path="/deck" component={Deck} />
-            <PrivateRoute path="/flashcards" component={Flashcards} />
-            <PrivateRoute path="/test-result/:id" component={DeckResultTest} />
+            <PrivateRoute exact path="/deck" component={Deck} />
+            <PrivateRoute exact path="/flashcards" component={Flashcards} />
+            <PrivateRoute exact path="/test-result/:id" component={DeckResultTest} />
           </div>
 
           <Route path="*" component={() => <h1>Page not found</h1>} />

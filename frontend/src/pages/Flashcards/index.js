@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import DeckService from "../Deck/service";
 import FlashcardService from "./service";
 import { faGrinWink, faMeh, faGrinBeamSweat } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Redirect } from 'react-router-dom'
+import PubSub from 'pubsub-js'
 
 const container = {
     width: '80%',
@@ -73,21 +73,8 @@ export class Flashcards extends Component {
     }
 
     componentDidMount(){
-        DeckService.findAll().then(response => this.setState({decks: response.data}))
-    }
-
-    fetchCards = (deck) => {
-        this.setState({deck})
-    	FlashcardService.findAll(`/question/deck/${deck}`).then(response => {
-            const flashcards = response.data.map(flashcard => {
-                return {
-                    ...flashcard,
-                    flipped: false,
-                    visible: true,
-                    difficulty: ''
-                }
-            })
-            this.setState({flashcards})
+        PubSub.subscribe('flashcards', (msg, data) => {
+            this.setState({flashcards: data})
         })
     }
 
@@ -157,10 +144,7 @@ export class Flashcards extends Component {
             <>
             {this.state.redirect ? <Redirect to={`test-result/${this.state.testResultId}`}></Redirect> : null}
             
-                <select className="form-control col-md-4" onChange={deck => this.fetchCards(deck.target.value)}>
-                    <option>Select deck</option>
-                    {this.state.decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
-                </select>
+
             
             <div style={container}>
                 <div style={flashcardsContainer}>

@@ -8,7 +8,7 @@ const main = {
     position: 'fixed',
     top: 0,
     boxShadow: '1px 5px 5px #aaa',
-    zIndex: '99'
+    zIndex: '1'
 }
 
 
