@@ -51,7 +51,7 @@ const Routes = () => (
             <PrivateRoute exact path="/deck/new" component={NewDeck} />
             <PrivateRoute exact path="/deck" component={Deck} />
             <PrivateRoute exact path="/flashcards" component={Flashcards} />
-            <PrivateRoute exact path="/test-result/:id" component={DeckResultTest} />
+            <PrivateRoute exact path="/test-result" component={DeckResultTest} />
           </div>
 
           <Route path="*" component={() => <h1>Page not found</h1>} />

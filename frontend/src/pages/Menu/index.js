@@ -18,7 +18,7 @@ const menu = {
     backgroundColor: '#fff',
     borderRadius: '5px',
     border: '1px solid black',
-    boxShadow: '1px 1px 1px',
+    boxShadow: '1px 1px 1px #aaa',
     marginLeft: '40px',
     marginTop: '50px',
     padding: '20px'
@@ -78,6 +78,7 @@ export default class Menu extends Component {
                             <li><Link style={link} to="/deck/new">New deck</Link></li>
                             <li><Link style={link} to="/deck">Decks</Link></li>
                             <li><Link style={link} to="/flashcards">Flashcards</Link></li>
+                            <li><Link style={link} to="/test-result">Test results</Link></li>
                         </ul>
                     </div> :
                     null

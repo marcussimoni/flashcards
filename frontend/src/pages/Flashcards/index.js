@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import PubSub from 'pubsub-js'
 
 const container = {
-    width: '80%',
+    width: '70%',
     margin: '0 auto',
     padding: '10px',
 }
@@ -22,13 +22,13 @@ const flashcardsContainer = {
 
 const flashcard = {
     position: 'relative',
-    width: '120px',
-    height: '150px',
+    width: '180px',
+    height: '220px',
     border: '1px solid black',
     borderRadius: '5px',
     boxShadow: '5px 5px 5px #aaa',
     float: 'left',
-    fontSize: '20px',
+    fontSize: '28px',
     backgroundColor: '#4f5d75',
     fontStyle: 'italic',
     color: '#fff',
@@ -48,7 +48,7 @@ const flashcardContentBack = {
     justifyContent: 'center',
     height: '80%',
     fontStyle: 'normal',
-    fontSize: '16px',
+    fontSize: '22px',
     whiteSpace: 'normal'
 }
 
@@ -57,6 +57,19 @@ const flashcardsButtons = {
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     padding: '0 10px 20px'
+}
+
+const sidedBar = {
+    position: 'fixed',
+    width: '12%',
+    height: '300px',
+    border: '1px solid #000',
+    borderRadius: '5px',
+    marginTop: '10px',
+    marginLeft: '10px',
+    boxShadow: '5px 5px 5px #aaa',
+    fontSize: '18px',
+    padding: '10px'
 }
 
 export class Flashcards extends Component {
@@ -98,80 +111,71 @@ export class Flashcards extends Component {
             }
         })
 
-        document.getElementById(selectedFlashcard.id).style = `
-        
-            opacity: 0;
+        this.setState({flashcards})
 
-            position: 'relative',
-            width: '120px',
-            height: '150px',
-            border: '1px solid black',
-            border-radius: '5px',
-            box-shadow: '5px 5px 5px #aaa',
-            float: 'left',
-            font-size: '20px',
-            background: '#4f5d75',
-            font-style: 'italic',
-            color: '#fff',
-            cursor: 'pointer'
+        const cardsLeft = flashcards.filter(card => card.visible)
 
-            -webkit-transition: opacity 1s ease-in-out;
-            -moz-transition: opacity 1s ease-in-out;
-            -ms-transition: opacity 1s ease-in-out;
-            transition: opacity 1s ease-in-out;
-        `
+        if(cardsLeft.length === 0){
+            FlashcardService.saveResult(flashcards).then(response => {
+                alert('result successful saved')
+                this.setState({redirect: true, testResultId: response.data})
+            })
+        }
 
-        
+    }
 
-        setTimeout(()=>{
-            this.setState({flashcards})
-
-            const cardsLeft = flashcards.filter(card => card.visible)
-
-            if(cardsLeft.length === 0){
-                FlashcardService.saveResult(flashcards).then(response => {
-                    alert('result successful saved')
-                    this.setState({redirect: true, testResultId: response.data})
-                })
-            }
-
-        }, 1500)
-
+    sidedPanel = () => {
+        const flashcards = [...this.state.flashcards]
+        const visible = flashcards.filter(flashcard => !flashcard.visible).length
+        const markedAsEasy = flashcards.filter(flashcard => flashcard.difficulty === '1').length
+        const markedAsMedium = flashcards.filter(flashcard => flashcard.difficulty === '2').length
+        const markedAsHard = flashcards.filter(flashcard => flashcard.difficulty === '3').length
+        return (
+            <div style={sidedBar}>
+                <p>Flashcards: {flashcards.length - visible}</p>
+                <p>Flipped cards: {visible}</p>
+                <p>Marked as easy: {markedAsEasy}</p>
+                <p>Marked as medium: {markedAsMedium}</p>
+                <p>Marked as hard: {markedAsHard}</p>
+            </div>
+        )
     }
 
     render(){
         return (
             <>
-            {this.state.redirect ? <Redirect to={`test-result/${this.state.testResultId}`}></Redirect> : null}
-            
-
-            
-            <div style={container}>
-                <div style={flashcardsContainer}>
-                    {this.state.flashcards.filter(item => item.visible === true).map(item => {
-                        return (
-                            <>
-                                {
-                                    item.flipped 
-                                    ? 
-                                    <div key={item.id} style={flashcard} id={item.id}>
-                                        <span style={flashcardContentBack}>{ item.answer }</span>
-                                        <div style={flashcardsButtons}>
-                                            <span key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
-                                            <span key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
-                                            <span key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                {this.state.redirect ? <Redirect to={`test-result/${this.state.testResultId}`}></Redirect> : null}
+                
+                {
+                    this.state.flashcards.length > 0 ? this.sidedPanel() : null
+                }
+                
+                <div style={container}>
+                    <div style={flashcardsContainer}>
+                        {this.state.flashcards.filter(item => item.visible === true).map(item => {
+                            return (
+                                <>
+                                    {
+                                        item.flipped 
+                                        ? 
+                                        <div key={item.id} style={flashcard} id={item.id}>
+                                            <span style={flashcardContentBack}>{ item.answer }</span>
+                                            <div style={flashcardsButtons}>
+                                                <span key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
+                                                <span key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
+                                                <span key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    :
-                                    <div key={item.id} style={flashcard} onClick={() => this.flipCard(item)}>
-                                        <span style={flashcardContent}>{ item.question }</span>
-                                    </div>
-                                }
-                            </>
-                        )
-                    })}
-                </div>           
-            </div>
+                                        :
+                                        <div key={item.id} style={flashcard} onClick={() => this.flipCard(item)}>
+                                            <span style={flashcardContent}>{ item.question }</span>
+                                        </div>
+                                    }
+                                </>
+                            )
+                        })}
+                    </div>           
+                </div>
             </>
         )
     }

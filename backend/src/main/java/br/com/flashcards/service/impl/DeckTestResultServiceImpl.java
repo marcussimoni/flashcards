@@ -3,18 +3,22 @@ package br.com.flashcards.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.flashcards.dto.DeckDto;
 import br.com.flashcards.dto.DeckTestResultDto;
 import br.com.flashcards.dto.ResultDto;
+import br.com.flashcards.dto.TestResultDto;
 import br.com.flashcards.dto.TotalAnswer;
+import br.com.flashcards.mapper.DeckTestResultMapper;
 import br.com.flashcards.model.Answer;
 import br.com.flashcards.model.Deck;
 import br.com.flashcards.model.DeckTestResult;
 import br.com.flashcards.model.Difficulty;
 import br.com.flashcards.model.Flashcard;
+import br.com.flashcards.model.User;
 import br.com.flashcards.repository.DeckTestResultRepository;
 import br.com.flashcards.repository.DeckTestResultRepository.IResultDto;
 import br.com.flashcards.service.DeckService;
@@ -31,13 +35,16 @@ public class DeckTestResultServiceImpl implements DeckTestResultService {
 	private FlashcardService questionService;
 	private DeckService deckService;
 	private UserService userService;
+	private DeckTestResultMapper deckTestResultMapper;
 
-	public DeckTestResultServiceImpl(DeckTestResultRepository repository, DifficultyService difficultyService, FlashcardService questionService, DeckService deckService, UserService userService) {
+	public DeckTestResultServiceImpl(DeckTestResultRepository repository, DifficultyService difficultyService, 
+			FlashcardService questionService, DeckService deckService, UserService userService, DeckTestResultMapper deckTestResultMapper) {
 		this.repository = repository;
 		this.difficultyService = difficultyService;
 		this.questionService = questionService;
 		this.deckService = deckService;
 		this.userService = userService;
+		this.deckTestResultMapper = deckTestResultMapper;
 	}
 	
 	@Override
@@ -96,5 +103,12 @@ public class DeckTestResultServiceImpl implements DeckTestResultService {
 		}
 		
 		return dto;
+	}
+	
+	@Override
+	public List<TestResultDto> findAll(Pageable page){
+		User user = userService.userAuthenticated();
+		List<DeckTestResult> result = repository.findAll(user, page);
+		return deckTestResultMapper.entityToDto(result);
 	}
 }

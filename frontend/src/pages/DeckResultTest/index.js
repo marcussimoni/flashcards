@@ -1,35 +1,148 @@
 import React, { Component } from "react";
 import DeckResultTestService from "./service";
 
+const modal = {
+    display: 'block',
+    zIndex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    position: 'fixed',
+    left: 0,
+    top: 0
+}
+
+const content = {
+    position: 'relative',
+    width: '60%',
+    height: '50%',
+    backgroundColor: '#ffffff',
+    top: '30%',
+    margin: '0 auto',
+    border: '1px solid #2d3142',
+    opacity: 1,
+    borderRadius: '10px'
+}
+
 export default class DeckResultTest extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            result: {}
+            results: [],
+            result: {
+                answers: []
+            },
+            showModal: false
         }
     }
 
     componentDidMount(){
-        const id = this.props.match.params['id']
-        DeckResultTestService.findById(id).then(response => {
-            console.log('response => ', response.data)
-            this.setState({result: response.data})
+        this.findAll()
+        window.onkeydown = (event) => {
+            const ESCAPE = 27
+            if(event.keyCode === ESCAPE){
+                this.setState({showModal: false})
+            }
+        }
+    }
+
+    findAll = () => {
+        DeckResultTestService.findAll().then(response => {
+            this.setState({results: response.data})
+        })
+    }
+
+    getValues = (key) => {
+
+        if(this.state.result.answers){
+            return this.state.result.answers.map(answer => {
+                return <td>{answer[key]}</td>
+            })
+        } else {
+            return ""
+        }
+        
+    }
+
+    dateFormat = (date) => {
+        if(date){
+            return `${date[2]}/${date[1]}/${date[0]} at: ${date[3]}:${date[4]}`
+        } else {
+            return ''
+        }
+    }
+
+    showModal = () => {
+        return(
+            <div style={modal}>
+                <div style={content}>
+
+                    <h1>Result test</h1>
+                    
+                    <h5>Deck selected: {this.state.result.description}</h5>
+                    <h7>Taken in: {this.dateFormat(this.state.result.timeStamp)}</h7>
+                    
+                    <table className="table tripped text-center">
+                        <thead>
+                            <tr>
+                                {this.getValues('description')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {this.getValues('total')}
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colSpan={this.state.result.answers.length - 1}></td>
+                                <td>
+                                    Total: {this.state.result.answers.length}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        )
+    }
+
+    selectResult = (item) => {
+        DeckResultTestService.findById(item.id).then(response => {
+            this.setState({result: response.data, showModal: true})
         })
     }
 
     render(){
         return (
-            <>
-                <h1>Dock result test</h1>
-                
-                <p>{this.state.result.description}</p>
-                <p>{this.state.result.timeStamp}</p>
-                
-                {/* {this.state.result.answers.map(answer => {
-                    return <p>{`${answer.description} | ${answer.total}`}></p>
-                })} */}
-            </>
+            <div className="container text-center">
+                {this.state.showModal ? this.showModal() : null}
+                <table className="table table-striped">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Deck</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.results.map(item => {
+                                return (
+                                    <tr key={item.id}>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.id}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.name}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.description}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</a></td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
         )
     }
 

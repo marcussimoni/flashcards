@@ -11,8 +11,6 @@ const main = {
     zIndex: '1'
 }
 
-
-
 const Header = (props) => <div className="row" style={main}>{props.children}</div>
 
 export default Header
