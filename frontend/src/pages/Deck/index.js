@@ -4,19 +4,7 @@ import PubSub from 'pubsub-js'
 import FlashcardService from "../Flashcards/service";
 import DeckService from "./service";
 import Footer from "../Footer";
-
-const  deckSelection = {
-    fontSize: '14px',
-    marginLeft: '5%'
-}
-
-const orderDescription = {
-    position: 'relative',
-    fontSize: '14px',
-    fontStyle: 'italic',
-    paddingTop: '8px',
-    marginLeft: '55%'
-}
+import './style.css'
 
 export class Deck extends Component {
 
@@ -108,13 +96,13 @@ export class Deck extends Component {
             <>  
                 <div className="container">
                     <div className="row mb-3">
-                        <div style={deckSelection}>
+                        <div className="deckSelection">
                             <select className="form-control" onChange={(event) => this.selectDeck(event.target.value)}>
                                 <option key="default">Choose your deck</option>
                                 {this.state.decks.map(deck => <option key={deck.id} value={deck.id} title={deck.description}>{deck.name}</option>)}
                             </select>
                         </div>
-                        <div style={orderDescription}>
+                        <div className="orderDescription">
                             {this.orderByDescription()}
                         </div>
                     </div>

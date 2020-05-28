@@ -17,14 +17,14 @@ class SignUp extends Component {
     e.preventDefault();
     const { username, email, password } = this.state;
     if (!username || !email || !password) {
-        this.setState({ error: "Preencha todos os dados para se cadastrar" });
+        this.setState({ error: "Fill all fields" });
     } else {
         try {
         await api.post("/sign-up", { username, email, password });
         this.props.history.push("/");
         } catch (err) {
         console.log(err);
-        this.setState({ error: "Ocorreu um erro ao registrar sua conta. T.T" });
+        this.setState({ error: "Erro while trying to create account" });
         }
     }
     };
@@ -36,22 +36,22 @@ class SignUp extends Component {
             {this.state.error && <p>{this.state.error}</p>}
             <input
                 type="text"
-                placeholder="Nome de usuário"
+                placeholder="Username"
                 onChange={e => this.setState({ username: e.target.value })}
             />
             <input
                 type="email"
-                placeholder="Endereço de e-mail"
+                placeholder="E-mail adress"
                 onChange={e => this.setState({ email: e.target.value })}
             />
             <input
                 type="password"
-                placeholder="Senha"
+                placeholder="password"
                 onChange={e => this.setState({ password: e.target.value })}
             />
-            <button type="submit">Cadastrar grátis</button>
+            <button type="submit">Create account</button>
             <hr />
-            <Link to="/">Fazer login</Link>
+            <Link to="/">Login</Link>
             </Form>
         </Container>
         );

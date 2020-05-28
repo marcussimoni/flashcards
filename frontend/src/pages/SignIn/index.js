@@ -17,7 +17,7 @@ class SignIn extends Component {
     e.preventDefault();
     const { email, password } = this.state;
     if (!email || !password) {
-      this.setState({ error: "Preencha e-mail e senha para continuar!" });
+      this.setState({ error: "Fill e-mail and password to procced" });
     } else {
       try {
         const response = await api.post("/authentication/sign-in", { email, password });
@@ -26,7 +26,7 @@ class SignIn extends Component {
       } catch (err) {
         this.setState({
           error:
-            "Houve um problema com o login, verifique suas credenciais. T.T"
+            "Invalid credentials"
         });
       }
     }
@@ -39,17 +39,17 @@ class SignIn extends Component {
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="email"
-            placeholder="Endereço de e-mail"
+            placeholder="E-mail adress"
             onChange={e => this.setState({ email: e.target.value })}
           />
           <input
             type="password"
-            placeholder="Senha"
+            placeholder="password"
             onChange={e => this.setState({ password: e.target.value })}
           />
-          <button type="submit">Entrar</button>
+          <button type="submit">Login</button>
           <hr />
-          <Link to="/signup">Criar conta grátis</Link>
+          <Link to="/signup">Create account</Link>
         </Form>
       </Container>
     );

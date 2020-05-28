@@ -1,29 +1,6 @@
 import React, { Component } from "react";
 import DeckResultTestService from "./service";
 
-const modal = {
-    display: 'block',
-    zIndex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    position: 'fixed',
-    left: 0,
-    top: 0
-}
-
-const content = {
-    position: 'relative',
-    width: '60%',
-    height: '50%',
-    backgroundColor: '#ffffff',
-    top: '30%',
-    margin: '0 auto',
-    border: '1px solid #2d3142',
-    opacity: 1,
-    borderRadius: '10px'
-}
-
 export default class DeckResultTest extends Component {
 
     constructor(props){
@@ -75,8 +52,8 @@ export default class DeckResultTest extends Component {
 
     showModal = () => {
         return(
-            <div style={modal}>
-                <div style={content}>
+            <div className="modal">
+                <div className="content">
 
                     <h1>Result test</h1>
                     
@@ -132,10 +109,10 @@ export default class DeckResultTest extends Component {
                             this.state.results.map(item => {
                                 return (
                                     <tr key={item.id}>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.id}</a></td>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.name}</a></td>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.description}</a></td>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</a></td>
+                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{item.id}</a></td>
+                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{item.deck.name}</a></td>
+                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{item.deck.description}</a></td>
+                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</a></td>
                                     </tr>
                                 )
                             })

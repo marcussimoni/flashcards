@@ -4,79 +4,19 @@ import { faGrinWink, faMeh, faGrinBeamSweat } from '@fortawesome/free-solid-svg-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Redirect } from 'react-router-dom'
 import PubSub from 'pubsub-js'
-
-const container = {
-    width: '70%',
-    margin: '0 auto',
-    padding: '10px',
-}
-
-const flashcardsContainer = {
-    position: 'relative',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
-    gridGap: '20px 0px',
-    overflow: 'visible'
-}
-
-const flashcard = {
-    position: 'relative',
-    width: '180px',
-    height: '220px',
-    border: '1px solid black',
-    borderRadius: '5px',
-    boxShadow: '5px 5px 5px #aaa',
-    float: 'left',
-    fontSize: '28px',
-    backgroundColor: '#4f5d75',
-    fontStyle: 'italic',
-    color: '#fff',
-    cursor: 'pointer'
-}
-
-const flashcardContent = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '80%'
-}
-
-const flashcardContentBack = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '80%',
-    fontStyle: 'normal',
-    fontSize: '22px',
-    whiteSpace: 'normal'
-}
-
-const flashcardsButtons = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    padding: '0 10px 20px'
-}
-
-const sidedBar = {
-    position: 'fixed',
-    width: '12%',
-    height: '300px',
-    border: '1px solid #000',
-    borderRadius: '5px',
-    marginTop: '10px',
-    marginLeft: '10px',
-    boxShadow: '5px 5px 5px #aaa',
-    fontSize: '18px',
-    padding: '10px'
-}
+import ReactTooltip from "react-tooltip";
+import './styles.css'
 
 export class Flashcards extends Component {
         
     constructor(props){
         super(props)
         this.state = {
+            timer: {
+                started: false,
+                time: 0
+            },
+            startedAt: {},
             testResultId: 0,
             redirect: false,
             decks: [],
@@ -87,7 +27,7 @@ export class Flashcards extends Component {
 
     componentDidMount(){
         PubSub.subscribe('flashcards', (msg, data) => {
-            this.setState({flashcards: data})
+            this.setState({flashcards: data, startedAt: new Date()})
         })
     }
 
@@ -131,7 +71,7 @@ export class Flashcards extends Component {
         const markedAsMedium = flashcards.filter(flashcard => flashcard.difficulty === '2').length
         const markedAsHard = flashcards.filter(flashcard => flashcard.difficulty === '3').length
         return (
-            <div style={sidedBar}>
+            <div className="sidedBar">
                 <p>Flashcards: {flashcards.length - visible}</p>
                 <p>Flipped cards: {visible}</p>
                 <p>Marked as easy: {markedAsEasy}</p>
@@ -141,6 +81,20 @@ export class Flashcards extends Component {
         )
     }
 
+    toolTip = (difficulty) => {
+        return `Mark this card as ${difficulty} difficulty`
+    }
+
+    seconds = 0;
+
+    startTimer = () => {
+        if(this.state.flashcards.length > 0){
+            return setInterval(() => {
+                return <div style={{position: 'fixed', right: '0', width: '100px'}}>{++this.seconds}</div>
+            }, 1000);
+        }
+    }
+ 
     render(){
         return (
             <>
@@ -149,26 +103,29 @@ export class Flashcards extends Component {
                 {
                     this.state.flashcards.length > 0 ? this.sidedPanel() : null
                 }
-                
-                <div style={container}>
-                    <div style={flashcardsContainer}>
+
+                <div className="container">
+                    <div className="flashcardsContainer">
                         {this.state.flashcards.filter(item => item.visible === true).map(item => {
                             return (
                                 <>
                                     {
                                         item.flipped 
                                         ? 
-                                        <div key={item.id} style={flashcard} id={item.id}>
-                                            <span style={flashcardContentBack}>{ item.answer }</span>
-                                            <div style={flashcardsButtons}>
-                                                <span key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
-                                                <span key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
-                                                <span key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                                        <div key={item.id} className="flashcard" id={item.id}>
+                                            <span className="flashcardContentBack">{ item.answer }</span>
+                                            <div className="flashcardsButtons">
+                                                
+                                                <span data-tip={this.toolTip('an easy')} key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
+                                                <span data-tip={this.toolTip('a medium')} key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
+                                                <span data-tip={this.toolTip('a hard')} key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                                                
+                                                <ReactTooltip place="top" type="dark" effect="float"/>
                                             </div>
                                         </div>
                                         :
-                                        <div key={item.id} style={flashcard} onClick={() => this.flipCard(item)}>
-                                            <span style={flashcardContent}>{ item.question }</span>
+                                        <div key={item.id} className="flashcard" onClick={() => this.flipCard(item)}>
+                                            <span className="flashcardContent">{ item.question }</span>
                                         </div>
                                     }
                                 </>

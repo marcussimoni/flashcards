@@ -1,0 +1,17 @@
+.deck-selection {
+    font-size: 14px;
+    margin-left: 5%;
+}
+
+.orderDescription {
+    position: relative;
+    font-size: 14px;
+    font-style: italic;
+    padding-top: 8px;
+    margin-left: 55%
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+}

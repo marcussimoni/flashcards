@@ -2,11 +2,7 @@ import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import DeckService from './service'
-
-const content = {
-    width: '80%',
-    margin: '0 auto'
-}
+import './style.css'
 
 export default class NewDeck extends Component {
 
@@ -79,7 +75,7 @@ export default class NewDeck extends Component {
     render(){
         return (
             <div>
-                <div style={content}>
+                <div className="content">
 
                     <div className="col-md-12">
                         <p>Create new Deck</p>

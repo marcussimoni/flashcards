@@ -1,0 +1,66 @@
+.container {
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.flashcardsContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px 0px;
+    overflow: visible;
+}
+
+.flashcard {
+    position: relative;
+    width: 180px;
+    height: 220px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 7px 10px 22px -6px rgba(0,0,0,0.58);
+    float: left;
+    font-size: 28px;
+    background-color: #4f5d75;
+    font-style: italic;
+    color: #fff;
+    cursor: pointer;
+}
+
+.flashcardContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+}
+
+.flashcardContentBack {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    font-style: normal;
+    font-size: 22px;
+    white-space: normal;
+}
+
+.flashcardsButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 10px 20px;
+}
+
+.sidedBar {
+    position: fixed;
+    width: 12%;
+    height: 300px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    box-shadow: 5px 5px 5px #aaa;
+    font-size: 18px;
+    padding: 10px;
+}

@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import PubSub from 'pubsub-js'
 import api from "../../services/api";
-
-const flexContent = {
-    display: 'flex',
-    alignItems: 'center',
-    width: '70%',
-    height: '80px',
-    margin: '0 auto'
-}
+import './style.css'
 
 export default class NewCard extends Component {
 
@@ -119,7 +112,7 @@ export default class NewCard extends Component {
     render(){
         return (
             <div className="container" style={{display: 'flex'}}>
-                <div style={flexContent}>
+                <div className="flexContent">
                     <div className="input-group">
                         <input autoFocus id="input-question" className="form-control" type="text" placeholder="Type your question" onChange={this.setQuestion} onBlur={this.searchWord} value={this.state.question}/>
                         <input id="input-answer" className="form-control" type="text" placeholder="Type your answer" onChange={this.setAnswer} value={this.state.answer}/>
