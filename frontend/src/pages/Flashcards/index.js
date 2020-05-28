@@ -116,9 +116,9 @@ export class Flashcards extends Component {
                                             <span className="flashcardContentBack">{ item.answer }</span>
                                             <div className="flashcardsButtons">
                                                 
-                                                <span data-tip={this.toolTip('an easy')} key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
-                                                <span data-tip={this.toolTip('a medium')} key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
-                                                <span data-tip={this.toolTip('a hard')} key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                                                <span data-tip={this.toolTip('an easy')} className="easy-button" key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
+                                                <span data-tip={this.toolTip('a medium')} className="medium-button" key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
+                                                <span data-tip={this.toolTip('a hard')} className="hard-button" key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
                                                 
                                                 <ReactTooltip place="top" type="dark" effect="float"/>
                                             </div>

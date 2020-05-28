@@ -75,7 +75,7 @@ export default class NewDeck extends Component {
     render(){
         return (
             <div>
-                <div className="content">
+                <div className="new-deck-content">
 
                     <div className="col-md-12">
                         <p>Create new Deck</p>

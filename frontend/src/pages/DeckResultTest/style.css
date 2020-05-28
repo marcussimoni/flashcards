@@ -1,4 +1,4 @@
-.modal {
+.modal-component {
     display: block;
     z-index: 1;
     width: 100%;
@@ -9,9 +9,9 @@
     top: 0;
 }
 
-.content {
+.modal-content {
     position: relative;
-    width: 60%;
+    width: 50% !important;
     height: 50%;
     background-color: #ffffff;
     top: 30%;

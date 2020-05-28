@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DeckResultTestService from "./service";
+import './style.css'
 
 export default class DeckResultTest extends Component {
 
@@ -52,8 +53,8 @@ export default class DeckResultTest extends Component {
 
     showModal = () => {
         return(
-            <div className="modal">
-                <div className="content">
+            <div className="modal-component">
+                <div className="modal-content">
 
                     <h1>Result test</h1>
                     
@@ -80,6 +81,12 @@ export default class DeckResultTest extends Component {
                             </tr>
                         </tfoot>
                     </table>
+                    <hr/>
+                    <div className="col-md-12">
+                        <div className="col-md-2">
+                            <button className="btn btn-danger" onClick={() => this.setState({showModal: false})}>Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
@@ -94,7 +101,7 @@ export default class DeckResultTest extends Component {
     render(){
         return (
             <div className="container text-center">
-                {this.state.showModal ? this.showModal() : null}
+                {this.state.showModal ? this.showModal() : <span className="test">MODAL HIDDEN</span>}
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr>
@@ -109,10 +116,10 @@ export default class DeckResultTest extends Component {
                             this.state.results.map(item => {
                                 return (
                                     <tr key={item.id}>
-                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{item.id}</a></td>
-                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{item.deck.name}</a></td>
-                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{item.deck.description}</a></td>
-                                        <td><a href="javascript:void(0);" onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.id}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.name}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.description}</a></td>
+                                        <td><a href="#" onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</a></td>
                                     </tr>
                                 )
                             })

@@ -64,3 +64,24 @@
     font-size: 18px;
     padding: 10px;
 }
+
+.easy-button{
+    transition: color 0.5s ease-out;
+}
+.easy-button:hover{
+    color: rgb(150, 253, 150);
+}
+
+.medium-button{
+    transition: color 0.5s ease-out;
+}
+.medium-button:hover{
+    color: rgb(239, 252, 126);
+}
+
+.hard-button{
+    transition: color 0.5s ease-out;
+}
+.hard-button:hover{
+    color: rgb(255, 154, 154);
+}
