@@ -4,7 +4,7 @@
     padding: 10px;
 }
 
-.flashcardsContainer {
+.flashcardsGridContainer {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -15,8 +15,10 @@
 
 .flashcard {
     position: relative;
-    width: 180px;
-    height: 220px;
+    /* width: 180px;
+    height: 220px; */
+    width: 230px;
+    height: 320px;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 7px 10px 22px -6px rgba(0,0,0,0.58);
@@ -32,7 +34,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80%;
+    height: 100%;
+    font-size: 38px;
 }
 
 .flashcardContentBack {
@@ -41,28 +44,18 @@
     justify-content: center;
     height: 80%;
     font-style: normal;
-    font-size: 22px;
+    font-size: 28px;
     white-space: normal;
+    font-weight: 400 !important;
 }
 
 .flashcardsButtons {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin: 0 auto;
+    width: 80%;
     padding: 0 10px 20px;
-}
-
-.sidedBar {
-    position: fixed;
-    width: 12%;
-    height: 300px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-left: 10px;
-    box-shadow: 5px 5px 5px #aaa;
-    font-size: 18px;
-    padding: 10px;
 }
 
 .easy-button{
@@ -76,7 +69,7 @@
     transition: color 0.5s ease-out;
 }
 .medium-button:hover{
-    color: rgb(239, 252, 126);
+    color: rgb(255, 251, 43);
 }
 
 .hard-button{
@@ -84,4 +77,59 @@
 }
 .hard-button:hover{
     color: rgb(255, 154, 154);
+}
+
+/* ################# */
+
+.sided-bar {
+    position: fixed;
+    width: 280px;
+    height: 310px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #aaa;
+    font-size: 18px;
+    padding: 40px;
+    left: 10%;
+}
+
+.sided-bar > p > label{
+    font-style: italic;
+    font-weight: 600;
+}
+
+.flex-container{
+    margin-top: 60px;
+    width: 80%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.arrow{
+    font-size: 50px;
+    cursor: pointer;
+    padding: 0 40px;
+}
+
+.arrow:hover{
+    color: darkslateblue;
+    animation: arrow-animation 0.8s infinite ease-in-out;
+}
+
+@keyframes arrow-animation {
+    25% {
+        transform: translate(5px);
+    }
+    50% {
+        transform: translate(0px);
+    }
+    75% {
+        transform: translate(5px);
+    }
+    100% {
+        transform: translate(0px);
+    }
 }

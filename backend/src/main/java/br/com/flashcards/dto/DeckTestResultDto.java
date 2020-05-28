@@ -8,5 +8,6 @@ import lombok.EqualsAndHashCode;
 public class DeckTestResultDto extends FlashcardDto {
 
 	private Long difficulty;
+	private Integer timesCardShowUp = 0;
 	
 }
