@@ -12,7 +12,7 @@ import br.com.flashcards.model.User;
 
 public interface DeckRepository extends CrudRepository<Deck, Long>{
 
-	@Query("SELECT d FROM Deck d WHERE d.user = :user")
+	@Query("SELECT d FROM Deck d WHERE d.user = :user ")
 	List<Deck> findAll(@Param("user") User user, Pageable page);
 
 }

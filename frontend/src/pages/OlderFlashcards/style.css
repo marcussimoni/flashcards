@@ -1,0 +1,24 @@
+.icon-styles {
+    position: relative;
+    color: #f86348;
+    cursor: pointer;
+}
+
+.icon-counter{
+    position: absolute;
+    font-size: 14px;
+    margin-top: 8px !important;
+    margin-left: -12px !important;
+    padding: 2px;
+
+}
+
+.float-button > button{
+    float: right;
+    margin-right: 10px;
+}
+
+.flashcard-itens {
+    cursor: pointer;
+    margin-right: 5px !important;
+}

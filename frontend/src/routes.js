@@ -7,11 +7,9 @@ import { Deck } from "./pages/Deck";
 import { Flashcards } from "./pages/Flashcards";
 import NewDeck from "./pages/Deck/newDeck";
 import DeckResultTest from "./pages/DeckResultTest";
-import Menu from "./pages/Menu";
 import Header from "./pages/Header";
 import NewCard from "./pages/NewCard";
 import FlashcardsHeader from "./pages/Flashcards/FlashcardsHeader";
-import Notifications from './pages/Notifications'
 
 const contentStyle = {
   color: '#2d3142 !important',

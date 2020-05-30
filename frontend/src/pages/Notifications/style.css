@@ -1,0 +1,5 @@
+.notifications-main {
+    display: flex;
+    border: '10px solid black';
+    width: 10px;
+}

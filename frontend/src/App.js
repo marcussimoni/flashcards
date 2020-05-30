@@ -4,6 +4,7 @@ import Routes from "./routes"
 import "./styles/global"
 import {LoadingComponent} from "./components/LoadingComponent";
 import { MessageComponent } from "./components/MessageComponent";
+import 'pretty-checkbox'
 
 const App = () =>  {
     return (

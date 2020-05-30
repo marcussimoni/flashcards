@@ -23,6 +23,7 @@ public class Deck implements Serializable {
 
 	public Deck() {
 		timeStamp = LocalDateTime.now();
+		this.active = true;
 	}
 	
 	private static final long serialVersionUID = 2152186386594099269L;
@@ -44,5 +45,8 @@ public class Deck implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "COD_USER", nullable = false)
 	private User user;
+	
+	@Column(name = "ACTIVE")
+	private Boolean active;
 	
 }

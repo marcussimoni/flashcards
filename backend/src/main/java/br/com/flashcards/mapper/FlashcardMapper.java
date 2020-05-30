@@ -1,6 +1,9 @@
 package br.com.flashcards.mapper;
 
+import javax.annotation.PostConstruct;
+
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
 import br.com.flashcards.dto.FlashcardDto;
@@ -13,4 +16,17 @@ public class FlashcardMapper extends Mapper<Flashcard, FlashcardDto>{
 		super(new ModelMapper());
 	}
 
+	@PostConstruct
+	public void configMapper() {
+		mapper.addMappings(new PropertyMap<Flashcard, FlashcardDto>() {
+
+			@Override
+			protected void configure() {
+				map().setChecked(source.getActive());
+			}
+			
+		});
+		
+	}
+	
 }

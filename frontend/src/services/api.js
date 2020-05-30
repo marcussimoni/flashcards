@@ -16,6 +16,12 @@ api.interceptors.response.use(response => {
   
   publish(false)
 
+  if(!error.response){
+    logout()
+    window.href = "/"
+    return
+  }
+
   if(error.response.status === 403){
     logout()
     window.href = "/"

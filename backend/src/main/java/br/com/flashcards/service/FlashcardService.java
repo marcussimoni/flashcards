@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Pageable;
 
 import br.com.flashcards.dto.FlashcardDto;
+import br.com.flashcards.dto.OlderFlashcardDto;
 import br.com.flashcards.model.Deck;
 import br.com.flashcards.model.Flashcard;
 
@@ -17,6 +18,7 @@ public interface FlashcardService {
 	FlashcardDto findQuestion(Long deckId, String question);
 	void deleteByDeck(Deck deck);
 	Optional<Flashcard >findById(Long id);
-	List<FlashcardDto> findAllOlderThan();
+	List<OlderFlashcardDto> findAllOlderThan();
+	void removeOldFlashcards(List<OlderFlashcardDto> flashcards);
 	
 }

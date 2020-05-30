@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.flashcards.dto.FlashcardDto;
+import br.com.flashcards.dto.OlderFlashcardDto;
 import br.com.flashcards.exception.FlashcardException;
 import br.com.flashcards.service.FlashcardService;
 
@@ -63,8 +65,13 @@ public class FlashcardController {
 	}
 	
 	@GetMapping(path = "older-flashcards")
-	public List<FlashcardDto> findAllOlderThan(){
+	public List<OlderFlashcardDto> findAllOlderThan(){
 		return service.findAllOlderThan();
+	}
+	
+	@PutMapping(path = "older-flashcards")
+	public void removeOldFlashcards(@RequestBody List<OlderFlashcardDto> flashcards){
+		service.removeOldFlashcards(flashcards);
 	}
 	
 }

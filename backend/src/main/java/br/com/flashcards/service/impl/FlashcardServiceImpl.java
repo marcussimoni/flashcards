@@ -1,6 +1,7 @@
 package br.com.flashcards.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.flashcards.dto.FlashcardDto;
+import br.com.flashcards.dto.OlderFlashcardDto;
 import br.com.flashcards.exception.FlashcardException;
 import br.com.flashcards.mapper.FlashcardMapper;
 import br.com.flashcards.model.Deck;
@@ -141,10 +143,66 @@ public class FlashcardServiceImpl implements FlashcardService {
 	}
 
 	@Override
-	public List<FlashcardDto> findAllOlderThan() {
+	public List<OlderFlashcardDto> findAllOlderThan() {
 		User user = userService.userAuthenticated();
 		LocalDateTime date = LocalDateTime.now().minusDays(7L);
-		return mapper.entityToDto(repository.findAllOlderThan(user, date));
+		
+		List<FlashcardDto> list = mapper.entityToDto(repository.findAllOlderThan(user, date));
+		List<OlderFlashcardDto> flashcards = new ArrayList<>();
+		
+		OlderFlashcardDto dto = new OlderFlashcardDto();
+		
+		for (FlashcardDto flashcard : list) {
+			
+			if(dto.getDeck().equals(flashcard.getDeck())) {
+				
+				flashcards.get(flashcards.size() - 1).getFlashcards().add(flashcard);
+				
+			} else {
+				
+				dto = new OlderFlashcardDto();
+				dto.setDeck(flashcard.getDeck());
+				dto.getFlashcards().add(flashcard);
+				flashcards.add(dto);
+				
+			}
+		}
+		
+		return flashcards;		
+	}
+
+	@Override
+	@Transactional
+	public void removeOldFlashcards(List<OlderFlashcardDto> list) {
+		
+		for (OlderFlashcardDto dto : list) {
+			
+			if(dto.getDeck().isChecked()) {
+				
+				for (FlashcardDto flashcard : dto.getFlashcards()) {
+					Flashcard entity = mapper.dtoToEntity(flashcard);
+					entity.setActive(!entity.getActive());
+					repository.save(entity);
+				}
+				
+			} else {
+				
+				List<FlashcardDto> flashcards = dto.getFlashcards();
+				
+				for (FlashcardDto flashcard : flashcards) {
+					
+					Flashcard entity = mapper.dtoToEntity(flashcard);
+					if(!flashcard.isChecked()) {
+						entity.setActive(false);
+						repository.save(entity);
+					}
+					
+				}
+				
+			}
+			
+		}
+		
 	}
 	
 }

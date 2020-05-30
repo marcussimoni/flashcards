@@ -78,6 +78,7 @@ public class DeckServiceImpl implements DeckService {
 		
 		deck.setName(dto.getName());
 		deck.setDescription(dto.getDescription());
+		deck.setActive(dto.isChecked());
 		
 		repository.save(deck);
 		

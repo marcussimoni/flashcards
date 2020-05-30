@@ -24,6 +24,7 @@ public class Flashcard implements Serializable {
 
 	public Flashcard() {
 		timeStamp = LocalDateTime.now();
+		this.active = true;
 	}
 	
 	private static final long serialVersionUID = 6919087746469243934L;
@@ -44,5 +45,8 @@ public class Flashcard implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "COD_DECK", nullable = false)
 	private Deck deck;
+	
+	@Column(name = "ACTIVE")
+	private Boolean active;
 	
 }
