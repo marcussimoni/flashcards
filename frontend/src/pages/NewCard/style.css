@@ -1,7 +1,6 @@
 .flexContent {
     display: flex;
     align-items: center;
-    width: 70%;
-    height: 80px;
+    width: 40%;
     margin: 0 auto;
 }

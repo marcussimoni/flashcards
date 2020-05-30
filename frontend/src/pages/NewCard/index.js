@@ -111,14 +111,12 @@ export default class NewCard extends Component {
 
     render(){
         return (
-            <div className="container" style={{display: 'flex'}}>
-                <div className="flexContent">
-                    <div className="input-group">
-                        <input autoFocus id="input-question" className="form-control" type="text" placeholder="Type your question" onChange={this.setQuestion} onBlur={this.searchWord} value={this.state.question}/>
-                        <input id="input-answer" className="form-control" type="text" placeholder="Type your answer" onChange={this.setAnswer} value={this.state.answer}/>
-                        <div className="input-group-append">
-                            <button className="btn btn-info" onClick={this.translate}>save</button>
-                        </div>
+            <div className="flexContent">
+                <div className="input-group">
+                    <input autoFocus id="input-question" className="form-control" type="text" placeholder="Type your question" onChange={this.setQuestion} onBlur={this.searchWord} value={this.state.question}/>
+                    <input id="input-answer" className="form-control" type="text" placeholder="Type your answer" onChange={this.setAnswer} value={this.state.answer}/>
+                    <div className="input-group-append">
+                        <button className="btn btn-info" onClick={this.translate}>save</button>
                     </div>
                 </div>
             </div>

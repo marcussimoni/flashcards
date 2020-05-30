@@ -1,5 +1,6 @@
 package br.com.flashcards.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.com.flashcards.model.Deck;
 import br.com.flashcards.model.Flashcard;
+import br.com.flashcards.model.User;
 
 public interface FlashcardRepository extends PagingAndSortingRepository<Flashcard, Long>{
 
@@ -25,5 +27,8 @@ public interface FlashcardRepository extends PagingAndSortingRepository<Flashcar
 
 	@Query("SELECT q FROM Flashcard q WHERE q.deck = :deck")
 	List<Flashcard> findByDeck(@Param("deck") Deck deck);
+	
+	@Query("SELECT q FROM Flashcard q INNER JOIN q.deck d WHERE d.user = :user AND q.timeStamp > :date")
+	List<Flashcard> findAllOlderThan(@Param("user") User user, @Param("date") LocalDateTime date);
 	
 }

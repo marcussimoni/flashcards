@@ -17,5 +17,6 @@ public interface FlashcardService {
 	FlashcardDto findQuestion(Long deckId, String question);
 	void deleteByDeck(Deck deck);
 	Optional<Flashcard >findById(Long id);
+	List<FlashcardDto> findAllOlderThan();
 	
 }

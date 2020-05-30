@@ -1,5 +1,6 @@
 package br.com.flashcards.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,9 +17,11 @@ import br.com.flashcards.exception.FlashcardException;
 import br.com.flashcards.mapper.FlashcardMapper;
 import br.com.flashcards.model.Deck;
 import br.com.flashcards.model.Flashcard;
+import br.com.flashcards.model.User;
 import br.com.flashcards.repository.FlashcardRepository;
 import br.com.flashcards.service.DeckService;
 import br.com.flashcards.service.FlashcardService;
+import br.com.flashcards.service.UserService;
 
 
 @Service
@@ -27,11 +30,13 @@ public class FlashcardServiceImpl implements FlashcardService {
 	private FlashcardRepository repository;
 	private FlashcardMapper mapper;
 	private DeckService deckService;
+	private UserService userService;
 
-	public FlashcardServiceImpl(FlashcardRepository repository, FlashcardMapper mapper, DeckService deckService) {
+	public FlashcardServiceImpl(FlashcardRepository repository, FlashcardMapper mapper, DeckService deckService, UserService userService) {
 		this.repository = repository;
 		this.mapper = mapper;
 		this.deckService = deckService;
+		this.userService = userService;
 	}
 	
 	@Override
@@ -133,6 +138,13 @@ public class FlashcardServiceImpl implements FlashcardService {
 	@Cacheable("question")
 	public Optional<Flashcard> findById(Long id) {
 		return repository.findById(id);
+	}
+
+	@Override
+	public List<FlashcardDto> findAllOlderThan() {
+		User user = userService.userAuthenticated();
+		LocalDateTime date = LocalDateTime.now().minusDays(7L);
+		return mapper.entityToDto(repository.findAllOlderThan(user, date));
 	}
 	
 }

@@ -14,12 +14,12 @@ export default class Menu extends Component {
     }
 
     componentDidMount(){
-        window.onkeydown = (event) => {
-            const ESCAPE = 27
-            if(event.keyCode === ESCAPE){
-                this.setState({showMenu: false})
-            }
-        }
+        // window.onkeydown = (event) => {
+        //     const ESCAPE = 27
+        //     if(event.keyCode === ESCAPE){
+        //         this.setState({showMenu: false})
+        //     }
+        // }
     }
 
     openMenu = () => {

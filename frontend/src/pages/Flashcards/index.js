@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import FlashcardService from "./service";
-import { faGrinWink, faMeh, faGrinBeamSweat, faArrowAltCircleLeft, faArrowCircleLeft, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import FlashcardService from "../../services/FlashcardService";
+import { faGrinWink, faMeh, faGrinBeamSweat, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Redirect } from 'react-router-dom'
 import PubSub from 'pubsub-js'
 import ReactTooltip from "react-tooltip";
-import './styles.css'
+import './style.css'
 
 const [EASY, MEDIUM, HARD] = [1,2,3]
 
@@ -42,7 +42,6 @@ export class Flashcards extends Component {
         const flashcards = this.state.flashcards.map(flashcard => {
             if(selectedFlashcard.id === flashcard.id){
                 let visible = false
-
                 return {...flashcard, visible, difficulty, timesCardShowUp: ++this.state.timesCardShowUp}
             } else {
                 return {...flashcard}

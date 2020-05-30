@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import TableComponent from "../../components/TableComponent";
+import FlashcardService from "../../services/FlashcardService";
 import PubSub from 'pubsub-js'
-import FlashcardService from "../Flashcards/service";
-import DeckService from "./service";
+import DeckService from "../../services/DeckService";
 import Footer from "../Footer";
 import './style.css'
 
 export class Deck extends Component {
+   
 
     constructor(props){
         super(props)
@@ -25,6 +26,7 @@ export class Deck extends Component {
         window.onkeydown = (event) => {
             const LETTER_T = 84
             const CTRL_ALT_PRESSED = event.ctrlKey && event.altKey
+
             if(CTRL_ALT_PRESSED && event.keyCode === LETTER_T){
                 const urlConfig = this.state.urlConfig();
                 

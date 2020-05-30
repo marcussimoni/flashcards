@@ -11,10 +11,11 @@ import Menu from "./pages/Menu";
 import Header from "./pages/Header";
 import NewCard from "./pages/NewCard";
 import FlashcardsHeader from "./pages/Flashcards/FlashcardsHeader";
+import Notifications from './pages/Notifications'
 
 const contentStyle = {
   color: '#2d3142 !important',
-  fontSize: '16px',
+  fontSize: '26px !important',
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -36,7 +37,6 @@ const Routes = () => (
     <div style={contentStyle}>
       <BrowserRouter>
         <Header>
-          <Menu></Menu>
           <Switch>
             <PrivateRoute exact path="/deck" component={NewCard}/>
             <PrivateRoute exact path="/flashcards" component={FlashcardsHeader} />
@@ -47,7 +47,7 @@ const Routes = () => (
           <Route exact path="/" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           
-          <div style={{marginTop: '100px'}}>
+          <div style={{marginTop: '130px'}}>
             <PrivateRoute exact path="/deck/new" component={NewDeck} />
             <PrivateRoute exact path="/deck" component={Deck} />
             <PrivateRoute exact path="/flashcards" component={Flashcards} />

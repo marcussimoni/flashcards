@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import DeckService from "../Deck/service";
-import FlashcardService from "./service";
+import DeckService from "../../services/DeckService";
+import FlashcardService from "../../services/FlashcardService";
 import PubSub from 'pubsub-js'
 
 const container = {
@@ -40,7 +40,7 @@ export default class FlashcardsHeader extends Component {
 
     render(){
         return (
-            <div className="container" style={container}>
+            <div className="flashcards-container" style={container}>
                 <select className="form-control col-md-4" onChange={deck => this.fetchCards(deck.target.value)}>
                     <option>Select deck</option>
                     {this.state.decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DeckResultTestService from "./service";
+import DeckResultTestService from "../../services/DeckResultService";
 import './style.css'
 
 export default class DeckResultTest extends Component {

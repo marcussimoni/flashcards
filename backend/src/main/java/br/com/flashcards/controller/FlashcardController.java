@@ -61,4 +61,10 @@ public class FlashcardController {
 	public void delete(@RequestBody List<Long> ids) throws InterruptedException {
 		service.delete(ids);
 	}
+	
+	@GetMapping(path = "older-flashcards")
+	public List<FlashcardDto> findAllOlderThan(){
+		return service.findAllOlderThan();
+	}
+	
 }

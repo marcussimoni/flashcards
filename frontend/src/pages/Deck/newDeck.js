@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import DeckService from './service'
+import DeckService from '../../services/DeckService'
 import './style.css'
 
 export default class NewDeck extends Component {
