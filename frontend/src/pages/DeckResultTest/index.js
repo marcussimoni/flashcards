@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DeckResultTestService from "../../services/DeckResultService";
 import './style.css'
+import ModalComponent from '../../components/ModalComponent'
 
 export default class DeckResultTest extends Component {
 
@@ -56,11 +57,11 @@ export default class DeckResultTest extends Component {
     }
 
     showModal = () => {
-        return(
-            <div className="modal-component">
-                <div className="modal-content">
 
-                    <h1>Result test</h1>
+        return(
+            
+            <ModalComponent>
+                <h1>Result test</h1>
                     
                     <h5>Deck selected: {this.state.result.description}</h5>
                     <h7>Taken in: {this.dateFormat(this.state.result.timeStamp)}</h7>
@@ -87,12 +88,12 @@ export default class DeckResultTest extends Component {
                     </table>
                     <hr/>
                     <div className="col-md-12">
-                        <div className="col-md-2">
-                            <button className="btn btn-danger" onClick={() => this.setState({showModal: false})}>Close</button>
-                        </div>
+                    <div className="col-md-2">
+                        <button className="btn btn-danger" onClick={() => this.setState({showModal: false})}>Close</button>
                     </div>
                 </div>
-            </div>
+            </ModalComponent>
+
         )
     }
 
