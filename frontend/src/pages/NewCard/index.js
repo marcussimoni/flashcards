@@ -56,6 +56,11 @@ export default class NewCard extends Component {
 
     setFocusOnInputQuestion = () => {
         const question = document.getElementById('input-question')
+        
+        if(!question){
+            return
+        }
+
         if(!question.value){
             question.focus()
         } else {

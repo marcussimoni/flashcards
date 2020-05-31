@@ -59,6 +59,8 @@ export class Flashcards extends Component {
             })
         }
 
+        this.moveToNext(selectedFlashcard)
+
     }
 
     sidedPanel = () => {
@@ -76,6 +78,7 @@ export class Flashcards extends Component {
                 <p><label>Marked as hard:</label> {markedAsHard}</p>
             </div>
         )
+        return null
     }
 
     toolTip = (difficulty) => {
@@ -93,23 +96,33 @@ export class Flashcards extends Component {
     }
 
     moveToNext = (item) => {
-        const flashcards = this.state.flashcards;
-        const index = flashcards.findIndex(i => i.id === item.id)
+        const flashcards = this.getVisibleFlashcards()
+        const index = this.getIndex(flashcards, item)
         const flashcard = flashcards[index + 1]
 
         if(flashcard){
             this.setState({flashcard})
+        } else if (flashcards.length > 0) {
+            this.setState({flashcard: flashcards[0]})
         }
     }
 
     moveToPrevious = (item) => {
-        const flashcards = this.state.flashcards;
-        const index = flashcards.findIndex(i => i.id === item.id)
+        const flashcards = this.getVisibleFlashcards()
+        const index = this.getIndex(flashcards, item)
         const flashcard = flashcards[index - 1]
         
         if(flashcard){
             this.setState({flashcard})
-        }
+        } 
+    }
+
+    getIndex = (flashcards, item) => {
+        return flashcards.findIndex(i => i.id === item.id)
+    }
+
+    getVisibleFlashcards = () => {
+        return this.state.flashcards.filter(flashcard => flashcard.visible);
     }
 
     showFlashcard = (item) => {
@@ -172,7 +185,7 @@ export class Flashcards extends Component {
         return (
             <>
                 <div className="flex-container">
-                    {this.state.redirect ? <Redirect to={`test-result/${this.state.testResultId}`}></Redirect> : null}
+                    {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}
                     
                     {
                         this.state.flashcards.length > 0 ? this.sidedPanel() : null

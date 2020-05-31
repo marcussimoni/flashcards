@@ -51,6 +51,10 @@ export default class DeckResultTest extends Component {
         }
     }
 
+    getTotalCards = () => {
+        return this.state.result.answers.map(result => result.total).reduce((x,y) => x += y)
+    }
+
     showModal = () => {
         return(
             <div className="modal-component">
@@ -76,7 +80,7 @@ export default class DeckResultTest extends Component {
                             <tr>
                                 <td colSpan={this.state.result.answers.length - 1}></td>
                                 <td>
-                                    Total: {this.state.result.answers.length}
+                                    Total: {this.getTotalCards()}
                                 </td>
                             </tr>
                         </tfoot>
@@ -95,13 +99,14 @@ export default class DeckResultTest extends Component {
     selectResult = (item) => {
         DeckResultTestService.findById(item.id).then(response => {
             this.setState({result: response.data, showModal: true})
+            console.log('result => ', response.data)
         })
     }
 
     render(){
         return (
             <div className="container text-center">
-                {this.state.showModal ? this.showModal() : <span className="test">MODAL HIDDEN</span>}
+                {this.state.showModal ? this.showModal() : null}
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr>
