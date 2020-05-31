@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.flashcards.constants.FlashcardsContants;
 import br.com.flashcards.dto.FlashcardDto;
 import br.com.flashcards.dto.OlderFlashcardDto;
 import br.com.flashcards.exception.FlashcardException;
@@ -29,15 +30,13 @@ import br.com.flashcards.service.FlashcardService;
 @RequestMapping(path = "question", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FlashcardController {
 
-	private static final String QUESTION = "question";
-	
 	private FlashcardService service;
 	
 	public FlashcardController(FlashcardService service) {
 		this.service = service;
 	}
 	
-	@Cacheable(QUESTION)
+	@Cacheable(FlashcardsContants.QUESTION)
 	@GetMapping(path = "deck/{deckId}")
 	public List<FlashcardDto> findAll(@PathVariable Long deckId, @PageableDefault(size = 100, sort = "question", direction = Direction.ASC) Pageable page) throws InterruptedException {
 		return service.findAll(deckId, page);
@@ -52,14 +51,14 @@ public class FlashcardController {
 		}
 	}
 	
-	@CacheEvict(value = QUESTION, allEntries = true)
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@CacheEvict(value = FlashcardsContants.QUESTION, allEntries = true)
 	public FlashcardDto save(@RequestBody FlashcardDto dto) throws InterruptedException {
 		return service.save(dto);
 	}
 	
-	@CacheEvict(value = QUESTION, allEntries = true)
 	@DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	@CacheEvict(value = FlashcardsContants.QUESTION, allEntries = true)
 	public void delete(@RequestBody List<Long> ids) throws InterruptedException {
 		service.delete(ids);
 	}

@@ -60,7 +60,7 @@ export default class OlderFlashcards extends Component {
         })
 
         this.setState(state => {
-            return {flashcards}
+            return { ...state, flashcards }
         }, () => console.log('flashcards => ', this.state.flashcards))
     }
 
@@ -79,6 +79,7 @@ export default class OlderFlashcards extends Component {
             if(response.status === 200){
                 this.findAllOlderThan()
                 alert('Flashcards successful updated')
+                this.setState({showModal: false})
             }
         })
     }
@@ -136,12 +137,13 @@ export default class OlderFlashcards extends Component {
                             })
                         }
                         <div className="float-button">
-                            <button className="btn btn-danger" onClick={this.removeOldFlashcards}>
+                            <button className="btn btn-danger" onClick={this.removeOldFlashcards} data-tip="Remove old flashcards" data-for="float-buttons">
                                 <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                             </button>
-                            <button className="btn btn-primary" onClick={this.closeModal}>
+                            <button className="btn btn-primary" onClick={this.closeModal} data-tip="Close modal" data-for="float-buttons">
                                 <FontAwesomeIcon icon={faWindowClose}></FontAwesomeIcon>
                             </button>
+                            <ReactTooltip id="float-buttons" delayShow="100" place="top" type="dark" effect="float"></ReactTooltip>
                         </div>
                     </ModalComponent> : null
                 }

@@ -2,6 +2,7 @@ package br.com.flashcards.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,8 +24,11 @@ import lombok.Data;
 public class Flashcard implements Serializable {
 
 	public Flashcard() {
-		timeStamp = LocalDateTime.now();
-		this.active = true;
+		
+		if(Objects.isNull(timeStamp)) {
+			timeStamp = LocalDateTime.now();
+		}
+		
 	}
 	
 	private static final long serialVersionUID = 6919087746469243934L;
@@ -39,7 +43,7 @@ public class Flashcard implements Serializable {
 	@Column(name = "ANSWER", length = 4000, nullable = false)
 	private String answer;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, updatable = true)
 	private LocalDateTime timeStamp;
 	
 	@ManyToOne
@@ -47,6 +51,6 @@ public class Flashcard implements Serializable {
 	private Deck deck;
 	
 	@Column(name = "ACTIVE")
-	private Boolean active;
+	private Boolean active = Boolean.TRUE;
 	
 }

@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.flashcards.constants.FlashcardsContants;
 import br.com.flashcards.dto.FlashcardDto;
 import br.com.flashcards.dto.OlderFlashcardDto;
 import br.com.flashcards.exception.FlashcardException;
@@ -173,36 +176,40 @@ public class FlashcardServiceImpl implements FlashcardService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = FlashcardsContants.QUESTION, allEntries = true)
 	public void removeOldFlashcards(List<OlderFlashcardDto> list) {
 		
 		for (OlderFlashcardDto dto : list) {
 			
+			List<Long> flashcardsId = null;
+			
 			if(dto.getDeck().isChecked()) {
 				
-				for (FlashcardDto flashcard : dto.getFlashcards()) {
-					Flashcard entity = mapper.dtoToEntity(flashcard);
-					entity.setActive(!entity.getActive());
-					repository.save(entity);
-				}
+				flashcardsId = dto.getFlashcards().stream().map(FlashcardDto::getId).collect(Collectors.toList());
 				
 			} else {
 				
-				List<FlashcardDto> flashcards = dto.getFlashcards();
-				
-				for (FlashcardDto flashcard : flashcards) {
-					
-					Flashcard entity = mapper.dtoToEntity(flashcard);
-					if(!flashcard.isChecked()) {
-						entity.setActive(false);
-						repository.save(entity);
-					}
-					
-				}
+				flashcardsId = dto.getFlashcards().stream().filter(FlashcardDto::isChecked).map(FlashcardDto::getId).collect(Collectors.toList());
 				
 			}
 			
+			if(!flashcardsId.isEmpty()) {
+				inactivateOldFlashcards(flashcardsId);
+			}
+			
+			updateTimeStamp(dto);
+			
 		}
 		
+	}
+
+	private void updateTimeStamp(OlderFlashcardDto dto) {
+		List<Long> ids = dto.getFlashcards().stream().filter(flashcard -> flashcard.isChecked() == false).map(FlashcardDto::getId).collect(Collectors.toList());
+		repository.updateTimeStampFlashcards(LocalDateTime.now(), ids);		
+	}
+
+	private void inactivateOldFlashcards(List<Long> flashcardsId) {
+		repository.inactivateOldFlashcards(flashcardsId);
 	}
 	
 }

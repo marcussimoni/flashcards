@@ -2,6 +2,7 @@ package br.com.flashcards.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +23,11 @@ import lombok.Data;
 public class Deck implements Serializable {
 
 	public Deck() {
-		timeStamp = LocalDateTime.now();
-		this.active = true;
+		
+		if(Objects.isNull(timeStamp)) {
+			timeStamp = LocalDateTime.now();
+		}
+		
 	}
 	
 	private static final long serialVersionUID = 2152186386594099269L;
@@ -47,6 +51,6 @@ public class Deck implements Serializable {
 	private User user;
 	
 	@Column(name = "ACTIVE")
-	private Boolean active;
+	private Boolean active = Boolean.TRUE;
 	
 }
