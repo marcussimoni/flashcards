@@ -50,7 +50,7 @@ export class Deck extends Component {
 
     orderByTimeStamp = () => {
         return {
-            description: 'Ordered by question',
+            description: 'Ordered by timestamp',
             url: `/question/deck/${this.state.deck}?sort=timeStamp,DESC`
         }
     }
@@ -98,15 +98,17 @@ export class Deck extends Component {
             <>  
                 <div className="container">
                     <div className="row mb-3">
-                        <div className="deckSelection">
-                            <select className="form-control" onChange={(event) => this.selectDeck(event.target.value)}>
-                                <option key="default">Choose your deck</option>
-                                {this.state.decks.map(deck => <option key={deck.id} value={deck.id} title={deck.description}>{deck.name}</option>)}
-                            </select>
-                        </div>
-                        <div className="orderDescription">
-                            {this.orderByDescription()}
-                        </div>
+                        
+                            <div className="col-md-6 deckSelection text-left">
+                                <select className="form-control" onChange={(event) => this.selectDeck(event.target.value)}>
+                                    <option key="default">Choose your deck</option>
+                                    {this.state.decks.map(deck => <option key={deck.id} value={deck.id} title={deck.description}>{deck.name}</option>)}
+                                </select>
+                            </div>
+                            <div className="col-md-6 orderDescription text-right">
+                                {this.orderByDescription()}
+                            </div>
+                        
                     </div>
                     <div style={{marginBottom: '50px'}}>
                         {TableComponent(this.state.data)}
