@@ -37,16 +37,33 @@ export class Flashcards extends Component {
         this.setState({flashcard: {...selectedFlashcard, flipped: true}})
     }
 
-    hide = (selectedFlashcard, difficulty) => {
+    setDifficulty = (selectedFlashcard, difficulty) => {
         
-        const flashcards = this.state.flashcards.map(flashcard => {
-            if(selectedFlashcard.id === flashcard.id){
-                let visible = false
-                return {...flashcard, visible, difficulty, timesCardShowUp: ++this.state.timesCardShowUp}
-            } else {
-                return {...flashcard}
-            }
-        })
+        let flashcards = [...this.state.flashcards]
+
+        selectedFlashcard.flipped = false
+        
+        if(difficulty == HARD && selectedFlashcard.timesCardShowUp < 4){
+            
+            this.updateFlashcard(selectedFlashcard, flashcards);
+
+        } else if (difficulty == MEDIUM && selectedFlashcard.timesCardShowUp < 2) {
+
+            this.updateFlashcard(selectedFlashcard, flashcards);
+
+        } else {
+
+            flashcards = this.state.flashcards.map(flashcard => {
+                if(selectedFlashcard.id === flashcard.id){
+                    let visible = false
+                    let timesCardShowUp = this.state.timesCardShowUp
+                    return {...flashcard, visible, difficulty, timesCardShowUp: ++timesCardShowUp}
+                } else {
+                    return {...flashcard}
+                }
+            })
+
+        }
 
         this.setState({flashcards})
 
@@ -153,9 +170,9 @@ export class Flashcards extends Component {
                                 <span className="flashcardContentBack">{ item.answer }</span>
                                 <div className="flashcardsButtons">
                                     
-                                    <span data-for="easy" data-tip={this.toolTip('an easy')} className="easy-button" key={'easy'} onClick={() => this.hide(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
-                                    <span data-for="medium" data-tip={this.toolTip('a medium')} className="medium-button" key={'normal'} onClick={() => this.hide(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
-                                    <span data-for="hard" data-tip={this.toolTip('a hard')} className="hard-button" key={'hard'} onClick={() => this.hide(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                                    <span data-for="easy" data-tip={this.toolTip('an easy')} className="easy-button" key={'easy'} onClick={() => this.setDifficulty(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
+                                    <span data-for="medium" data-tip={this.toolTip('a medium')} className="medium-button" key={'normal'} onClick={() => this.setDifficulty(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
+                                    <span data-for="hard" data-tip={this.toolTip('a hard')} className="hard-button" key={'hard'} onClick={() => this.setDifficulty(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
 
                                     <ReactTooltip id="easy" delayShow="300" place="left" type="dark" effect="float"/>
                                     <ReactTooltip id="medium" delayShow="300" place="bottom" type="dark" effect="float"/>
@@ -181,20 +198,25 @@ export class Flashcards extends Component {
         )
     }
  
+    updateFlashcard(selectedFlashcard, flashcards) {
+        selectedFlashcard.timesCardShowUp++;
+        selectedFlashcard.difficulty = HARD;
+        const index = this.getIndex(flashcards, selectedFlashcard);
+        flashcards.splice(index, 1);
+        flashcards.push(selectedFlashcard);
+    }
+
     render(){
+        const showSidePanel = this.state.flashcards.length > 0
         return (
-            <>
-                <div className="flex-container">
-                    {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}
-                    
-                    {
-                        this.state.flashcards.length > 0 ? this.sidedPanel() : null
-                    }
-                    
-                    {this.showFlashcard(this.state.flashcard)}                                       
-                    
-                </div>
-            </>
+            <div className="flex-container">
+                {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}
+                
+                { showSidePanel ? this.sidedPanel() : null }
+                
+                {this.showFlashcard(this.state.flashcard)}                                       
+                
+            </div>
         )
     }
        

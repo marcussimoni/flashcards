@@ -11,5 +11,6 @@ public class FlashcardDto {
 	private String obs;
 	private DeckDto deck;
 	private boolean checked;
+	private Integer timesCardShowUp = 0;
 	
 }
