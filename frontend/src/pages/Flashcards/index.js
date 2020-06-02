@@ -31,6 +31,17 @@ export class Flashcards extends Component {
         PubSub.subscribe('flashcards', (msg, data) => {
             this.setState({flashcards: data, startedAt: new Date(), flashcard: {...data[0], visible: true}})
         })
+
+        document.onkeydown = (event) => {
+            const keyCode = event.keyCode;
+            if(keyCode === 37){
+                this.moveToPrevious(this.state.flashcard)
+            } else if (keyCode === 39) {
+                this.moveToNext(this.state.flashcard)
+            } else if (keyCode === 38) {
+                this.flipCard(this.state.flashcard)
+            }
+        }
     }
 
     flipCard = (selectedFlashcard) => {
@@ -42,7 +53,7 @@ export class Flashcards extends Component {
         let flashcards = [...this.state.flashcards]
 
         selectedFlashcard.flipped = false
-        
+
         if(difficulty == HARD && selectedFlashcard.timesCardShowUp < 4){
             
             this.updateFlashcard(selectedFlashcard, flashcards);
