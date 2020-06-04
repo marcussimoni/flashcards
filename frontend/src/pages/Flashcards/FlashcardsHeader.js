@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import DeckService from "../../services/DeckService";
 import FlashcardService from "../../services/FlashcardService";
 import PubSub from 'pubsub-js'
+import styled from 'styled-components'
 
-const container = {
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center'
-}
+const FlashcardsContainer = styled.div`
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex; 
+    justify-content: center;
+    align-items: 'center';
+` 
 
 export default class FlashcardsHeader extends Component {
     
@@ -40,12 +44,12 @@ export default class FlashcardsHeader extends Component {
 
     render(){
         return (
-            <div className="flashcards-container" style={container}>
+            <FlashcardsContainer>
                 <select className="form-control col-md-4" onChange={deck => this.fetchCards(deck.target.value)}>
                     <option>Select deck</option>
                     {this.state.decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
                 </select>
-            </div>
+            </FlashcardsContainer>
         )
     }
 }

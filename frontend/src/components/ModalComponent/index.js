@@ -1,13 +1,13 @@
 import React from 'react'
-import './style.css'
+import { ModalContent, ModalMain } from './style'
 
 const ModalComponent = (props) => {
     return (
-        <div className="modal-component" id="modal-component">
-            <div className="modal-main">
+        <ModalContent id="modal-component">
+            <ModalMain>
                 {props.children}
-            </div>
-        </div>                
+            </ModalMain>
+        </ModalContent>      
     )
 }
 

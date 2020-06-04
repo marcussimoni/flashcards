@@ -1,20 +1,20 @@
 import React from "react"
-import './style.css'
 import Menu from "../Menu"
 import Notifications from "../Notifications"
+import {HeaderMain, HeaderMenu, HeaderContent, HeaderNotifications} from './style.js'
 
 const Header = (props) => (
-    <div className="header-main">
-        <div className="header-menu">
+    <HeaderMain>
+        <HeaderMenu>
             <Menu></Menu>
-        </div>
-        <div className="header-content">
+        </HeaderMenu>
+        <HeaderContent>
             {props.children}
-        </div>
-        <div className="header-notifications">
+        </HeaderContent>
+        <HeaderNotifications>
             <Notifications></Notifications>
-        </div>
-    </div>
+        </HeaderNotifications>
+    </HeaderMain>
 )
 
 export default Header

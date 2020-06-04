@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Redirect } from 'react-router-dom'
 import PubSub from 'pubsub-js'
 import ReactTooltip from "react-tooltip";
-import './style.css'
+import {Flashcard, FlashcardContent, FlashcardsButtons, FlashcardButton, 
+        FlashcardFront, FlashcardBack, SidedBar, SidedBarItem, FlexContainer, 
+        Arrow, List} from './style'
 
 const [EASY, MEDIUM, HARD] = [1,2,3]
 
@@ -98,13 +100,13 @@ export class Flashcards extends Component {
         const markedAsMedium = flashcards.filter(flashcard => flashcard.difficulty === '2').length
         const markedAsHard = flashcards.filter(flashcard => flashcard.difficulty === '3').length
         return (
-            <div className="sided-bar">
-                <p><label>Flashcards:</label> {flashcards.length - visible}</p>
-                <p><label>Flipped cards:</label> {visible}</p>
-                <p><label>Marked as easy:</label> {markedAsEasy}</p>
-                <p><label>Marked as medium:</label> {markedAsMedium}</p>
-                <p><label>Marked as hard:</label> {markedAsHard}</p>
-            </div>
+            <SidedBar>
+                <p><SidedBarItem>Flashcards:</SidedBarItem> {flashcards.length - visible}</p>
+                <p><SidedBarItem>Flipped cards:</SidedBarItem> {visible}</p>
+                <p><SidedBarItem>Marked as easy:</SidedBarItem> {markedAsEasy}</p>
+                <p><SidedBarItem>Marked as medium:</SidedBarItem> {markedAsMedium}</p>
+                <p><SidedBarItem>Marked as hard:</SidedBarItem> {markedAsHard}</p>
+            </SidedBar>
         )
         return null
     }
@@ -169,38 +171,43 @@ export class Flashcards extends Component {
 
                 <div style={{display: 'flex', alignItems: 'center'}}>
 
-                    <div className="arrow" data-for="tooltip-left" data-tip="Move to previous card" onClick={() => this.moveToPrevious(item)}>
+                    <Arrow data-for="tooltip-left" data-tip="Move to previous card" onClick={() => this.moveToPrevious(item)}>
                         <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
-                    </div>
+                    </Arrow>
 
-                    <div className="flashcard">
-                        {
-                            item.flipped 
-                            ? 
-                            <div key={item.id} className="flashcard" id={item.id}>
-                                <span className="flashcardContentBack">{ item.answer }</span>
-                                <div className="flashcardsButtons">
+                    {
+                        item.flipped 
+                        ? 
+                        <Flashcard key={item.id} id={item.id}>
+                            <div>
+                                <FlashcardFront>{ item.question }</FlashcardFront>
+                                <FlashcardBack>
+                                    <List>
+                                        { item.answer.split(',').map(value => <li>{value}</li>) }
+                                    </List>
+                                </FlashcardBack>
+                                <FlashcardsButtons className="flashcardsButtons">
                                     
-                                    <span data-for="easy" data-tip={this.toolTip('an easy')} className="easy-button" key={'easy'} onClick={() => this.setDifficulty(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></span>
-                                    <span data-for="medium" data-tip={this.toolTip('a medium')} className="medium-button" key={'normal'} onClick={() => this.setDifficulty(item, '2')}><FontAwesomeIcon icon={faMeh}/></span>
-                                    <span data-for="hard" data-tip={this.toolTip('a hard')} className="hard-button" key={'hard'} onClick={() => this.setDifficulty(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></span>
+                                    <FlashcardButton data-for="easy" data-tip={this.toolTip('an easy')} type="easy" key={'easy'} onClick={() => this.setDifficulty(item, '1')}><FontAwesomeIcon icon={faGrinWink}/></FlashcardButton>
+                                    <FlashcardButton data-for="medium" data-tip={this.toolTip('a medium')} type="medium" key={'normal'} onClick={() => this.setDifficulty(item, '2')}><FontAwesomeIcon icon={faMeh}/></FlashcardButton>
+                                    <FlashcardButton data-for="hard" data-tip={this.toolTip('a hard')} type="hard" key={'hard'} onClick={() => this.setDifficulty(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></FlashcardButton>
 
                                     <ReactTooltip id="easy" delayShow="300" place="left" type="dark" effect="float"/>
                                     <ReactTooltip id="medium" delayShow="300" place="bottom" type="dark" effect="float"/>
                                     <ReactTooltip id="hard" delayShow="300" place="right" type="dark" effect="float"/>
 
-                                </div>
+                                </FlashcardsButtons>
                             </div>
-                            :
-                            <div key={item.id} className="flashcard" onClick={() => this.flipCard(item)} data-for="tooltip-top" data-tip="Click to flip flashcard">
-                                <span className="flashcardContent">{ item.question }</span>
-                            </div>
-                        }
-                    </div>    
+                        </Flashcard>
+                        :
+                        <Flashcard key={item.id} onClick={() => this.flipCard(item)} data-for="tooltip-top" data-tip="Click to flip flashcard">
+                            <FlashcardContent>{ item.question }</FlashcardContent>
+                        </Flashcard>
+                    } 
 
-                    <div className="arrow" data-for="tooltip-right" data-tip="Move to next card" onClick={() => this.moveToNext(item)}>
+                    <Arrow data-for="tooltip-right" data-tip="Move to next card" onClick={() => this.moveToNext(item)}>
                         <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
-                    </div>
+                    </Arrow>
                 </div>
 
 
@@ -220,14 +227,14 @@ export class Flashcards extends Component {
     render(){
         const showSidePanel = this.state.flashcards.length > 0
         return (
-            <div className="flex-container">
+            <FlexContainer>
                 {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}
                 
                 { showSidePanel ? this.sidedPanel() : null }
                 
                 {this.showFlashcard(this.state.flashcard)}                                       
                 
-            </div>
+            </FlexContainer>
         )
     }
        

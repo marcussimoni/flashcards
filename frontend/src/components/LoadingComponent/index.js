@@ -1,22 +1,23 @@
 import ReactLoading from "react-loading";
 import React, { Component } from "react";
 import PubSub from 'pubsub-js'
+import styled from 'styled-components'
+
+const Loading = styled.div`
+    z-index: 100;
+    background-color: #eee;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    top: 0;
+`
 
 export class LoadingComponent extends Component {
-
-    cssStyle = {
-        zIndex: '100',
-        backgroundColor: '#eee',
-        position: 'fixed',
-        display: 'flex',
-        justifyContent: 'center',
-        opacity: '0.5',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        top: 0
-    }
-    
+  
     subscriber = (msg, data) => {
         this.setState({showLoadingComponent: data})
     }
@@ -34,7 +35,7 @@ export class LoadingComponent extends Component {
 
     render(){
         if(this.state.showLoadingComponent) {
-            return <div style={this.cssStyle}><ReactLoading type={this.props.type} color={this.props.color} height={'5%'} width={'5%'} /></div>
+            return <Loading><ReactLoading type={this.props.type} color={this.props.color} height={'5%'} width={'5%'} /></Loading>
         } else {
             return <div></div>
         }
