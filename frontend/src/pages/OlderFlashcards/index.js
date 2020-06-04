@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import FlashcardService from '../../services/FlashcardService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faComment, faTrash, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import './style.css'
+import './style.js'
 import ReactTooltip from 'react-tooltip'
 import ModalComponent from '../../components/ModalComponent'
+import {IconStyles, IconCounter, FloatButton, FlashcardItens} from './style.js'
 
 export default class OlderFlashcards extends Component {
    
@@ -91,18 +92,18 @@ export default class OlderFlashcards extends Component {
     render(){
         return (
             <>
-                <div className="icon-styles">
+                <IconStyles>
                     {
                         this.getTotalFlashcards() > 0
                         ? 
                         <div data-tip="Check older flashcard" onClick={this.checkOlderFlashcards}>
-                            <span className="icon-counter">{this.getTotalFlashcards()}</span>
+                            <IconCounter className="icon-counter">{this.getTotalFlashcards()}</IconCounter>
                             <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
                             <ReactTooltip delayShow="300" place="left" type="dark" effect="float"></ReactTooltip>
                         </div>
                         : null
                     }
-                </div>
+                </IconStyles>
                 {
                     this.state.showModal ?
                     <ModalComponent>    
@@ -123,9 +124,9 @@ export default class OlderFlashcards extends Component {
                                                 item.flashcards.map(flashcard => {
                                                     return (
                                                         <li key={flashcard.id}>
-                                                            <input id={`flashcard-${flashcard.id}`} className="flashcard-itens"
-                                                                   checked={flashcard.checked}
-                                                                   type="checkbox" onClick={(event) => this.selectFlashcard(flashcard, event.target.checked)}/>
+                                                            <FlashcardItens id={`flashcard-${flashcard.id}`} className="flashcard-itens" checked={flashcard.checked} 
+                                                                            type="checkbox" onClick={(event) => this.selectFlashcard(flashcard, event.target.checked)}>
+                                                            </FlashcardItens>
                                                             <label for={`flashcard-${flashcard.id}`}>{flashcard.question}</label>
                                                         </li>
                                                     )
@@ -136,7 +137,7 @@ export default class OlderFlashcards extends Component {
                                 )
                             })
                         }
-                        <div className="float-button">
+                        <FloatButton>
                             <button className="btn btn-danger" onClick={this.removeOldFlashcards} data-tip="Remove old flashcards" data-for="float-buttons">
                                 <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                             </button>
@@ -144,7 +145,7 @@ export default class OlderFlashcards extends Component {
                                 <FontAwesomeIcon icon={faWindowClose}></FontAwesomeIcon>
                             </button>
                             <ReactTooltip id="float-buttons" delayShow="100" place="top" type="dark" effect="float"></ReactTooltip>
-                        </div>
+                        </FloatButton>
                     </ModalComponent> : null
                 }
             </>

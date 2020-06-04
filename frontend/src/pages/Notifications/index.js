@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import OlderFlashcards from '../OlderFlashcards'
-import './style.css'
+import {NotificationsMain} from './style.js'
 
 export default class Notifications extends Component {
 
     render(){
         return (
-            <div className="notifications-main">
+            <NotificationsMain>
                 <OlderFlashcards></OlderFlashcards>
-            </div>
+            </NotificationsMain>
         )
     }
 

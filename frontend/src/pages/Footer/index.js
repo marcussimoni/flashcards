@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../../services/api";
 import PubSub from 'pubsub-js'
-import './style.css'
+import {Main, ActionButtons} from './style.js'
 
 export default class Footer extends Component {
 
@@ -29,13 +29,13 @@ export default class Footer extends Component {
 
     render(){
         return (
-            <div className="main">
+            <Main>
                 <div className="container">
-                    <div className="action-buttons">
+                    <ActionButtons>
                         <button className="btn-circle btn-danger " onClick={this.deleteItens}><i className="fa fa-trash"></i></button>
-                    </div>
+                    </ActionButtons>
                 </div>
-            </div>
+            </Main>
         )
     }
 

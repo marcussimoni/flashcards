@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PubSub from 'pubsub-js'
 import api from "../../services/api";
-import './style.css'
+import {FlexContent} from './style.js'
 
 export default class NewCard extends Component {
 
@@ -116,7 +116,7 @@ export default class NewCard extends Component {
 
     render(){
         return (
-            <div className="flexContent">
+            <FlexContent>
                 <div className="input-group">
                     <input autoFocus id="input-question" className="form-control" type="text" 
                            placeholder="Type your question" onChange={this.setQuestion} 
@@ -129,7 +129,7 @@ export default class NewCard extends Component {
                         <button className="btn btn-info" onClick={this.translate}>save</button>
                     </div>
                 </div>
-            </div>
+            </FlexContent>
         )
     }
 
