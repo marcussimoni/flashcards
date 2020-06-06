@@ -1,10 +1,8 @@
 package br.com.flashcards;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class FlashcardsApplicationTests {
+class FlashcardsApplicationTests extends JUnitTestConfig {
 
 	@Test
 	void contextLoads() {

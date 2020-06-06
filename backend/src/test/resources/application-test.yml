@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+jwt:
+  token:
+    expiration: 86400000
+    password: a$djs&3jdkg0;djsimxhfn%abd
+
+spring:
+  application:
+    name: 'flashcards'
+  datasource:
+    plataform: h2
+    schema: classpath:/schema-h2.sql
+    data: classpath:/data-h2.sql
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  jpa:
+    database-plataform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none #drop n create table again, good for testing, comment this in production
+    

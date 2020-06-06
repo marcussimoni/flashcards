@@ -35,7 +35,7 @@ public class User implements Serializable, UserDetails {
 	private static final long serialVersionUID = 2834007606288276147L;
 
 	@Id
-	@GeneratedValue(generator = "user_sq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "SQ_USER", strategy = GenerationType.SEQUENCE)
 	private long id;
 	
 	@Column(name = "first_name", nullable = false, length = 100)
