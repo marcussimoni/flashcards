@@ -35,16 +35,19 @@ class SignUp extends Component {
             <Form onSubmit={this.handleSignUp}>
             {this.state.error && <p>{this.state.error}</p>}
             <input
+                className="form-control"
                 type="text"
                 placeholder="Username"
                 onChange={e => this.setState({ username: e.target.value })}
             />
             <input
+                className="form-control"
                 type="email"
                 placeholder="E-mail adress"
                 onChange={e => this.setState({ email: e.target.value })}
             />
             <input
+                className="form-control"
                 type="password"
                 placeholder="password"
                 onChange={e => this.setState({ password: e.target.value })}

@@ -33,7 +33,7 @@ const Routes = () => (
   <div>
       
     <div style={contentStyle}>
-      <BrowserRouter>
+      <BrowserRouter basename="flashcards">
         <Header>
           <Switch>
             <PrivateRoute exact path="/deck" component={NewCard}/>

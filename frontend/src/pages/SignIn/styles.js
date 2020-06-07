@@ -28,7 +28,6 @@ export const Form = styled.form`
   }
   input {
     flex: 1;
-    height: 46px;
     margin-bottom: 15px;
     padding: 0 20px;
     color: #777;
@@ -42,7 +41,7 @@ export const Form = styled.form`
   button {
     color: #fff;
     font-size: 16px;
-    background: #fc6963;
+    background: #4f5d75;
     height: 56px;
     border: 0;
     border-radius: 5px;
