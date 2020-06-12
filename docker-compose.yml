@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  postgres-server:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "admin"
+    ports:
+      - "5432:5432"
+    networks:
+      - springcloud
+      
+  pgAdmin-server:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-server
+    networks:
+      - springcloud
+
+networks: 
+  springcloud:
+    driver: bridge

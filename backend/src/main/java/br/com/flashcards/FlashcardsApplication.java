@@ -41,11 +41,11 @@ public class FlashcardsApplication {
 		
 		UserService service = context.getBean(UserService.class);
 		
-		Optional<User> optional = service.findByUsername("marcus");
+		Optional<User> optional = service.findByUsername("user-test");
 		
 		if(!optional.isPresent()) {
 			UserDto dto = new UserDto();
-			dto.setUsername("marcus");
+			dto.setUsername("user-test");
 			dto.setEmail("teste@teste.com");
 			dto.setFirstName("first name");
 			dto.setLastName("last name");
