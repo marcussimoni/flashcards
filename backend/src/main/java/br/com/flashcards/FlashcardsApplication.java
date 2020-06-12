@@ -36,7 +36,7 @@ public class FlashcardsApplication {
 	private static void createTestUser(ConfigurableApplicationContext context) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 		
-		String password = bcrypt.encode("123456");
+		String password = bcrypt.encode("test123");
 		System.out.println("PASSWORD: " + password);
 		
 		UserService service = context.getBean(UserService.class);
@@ -46,7 +46,7 @@ public class FlashcardsApplication {
 		if(!optional.isPresent()) {
 			UserDto dto = new UserDto();
 			dto.setUsername("user-test");
-			dto.setEmail("teste@teste.com");
+			dto.setEmail("test@test.com");
 			dto.setFirstName("first name");
 			dto.setLastName("last name");
 			dto.setPassword(password);
