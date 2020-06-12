@@ -18,7 +18,7 @@ Execute the following commands on your terminal:
 
 3. Next step is to package and initialize the rest api server. For this you'll need to enter `cd backend` and execute `mvn clean package -DskipTests spring-boot:repackage` and after build is completed you'll need to initialize the application executing `java -jar ./target/flashcards-0.0.1-SNAPSHOT.jar --spring.profiles.active=demo`
 
-4. After backend has started go to frontend folder and run: `npm install` to download all dependencies necessary to run the application and then `npm start` to initialize and open the application in your web browser.
+4. After backend has started go to frontend folder and run: `npm install` to download all dependencies necessary to run the application and then `npm start` to initialize and open the application in your web browser. In case the app was not lauched in your browser you can type `localhost:3000/flashcards`.
 
 5. To access flashcards app type ***test@test.com*** in username field and ***test123*** in password field and click login
 
