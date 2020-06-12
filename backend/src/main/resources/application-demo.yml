@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+jwt:
+  token:
+    expiration: 86400000
+    password: a$djs&3jdkg0;djsimxhfn%abd
+
+spring:
+  application:
+    name: 'flashcards'
+  datasource:
+    plataform: h2
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  jpa:
+    database-plataform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    
