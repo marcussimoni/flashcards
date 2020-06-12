@@ -9,9 +9,9 @@ import 'pretty-checkbox'
 const App = () =>  {
     return (
         <div>
-          <Routes />
+            <Routes />
             <MessageComponent></MessageComponent>
-          <LoadingComponent type="spin" color="#000"></LoadingComponent>
+            <LoadingComponent type="spin" color="#000"></LoadingComponent>
         </div>
     )
 }
