@@ -3,6 +3,7 @@ import DeckService from "../../services/DeckService";
 import FlashcardService from "../../services/FlashcardService";
 import PubSub from 'pubsub-js'
 import styled from 'styled-components'
+import ComboBoxComponent from "../../components/ComboBoxComponent";
 
 const FlashcardsContainer = styled.div`
     width: 70%;
@@ -45,10 +46,7 @@ export default class FlashcardsHeader extends Component {
     render(){
         return (
             <FlashcardsContainer>
-                <select className="form-control col-md-4" onChange={deck => this.fetchCards(deck.target.value)}>
-                    <option>Select deck</option>
-                    {this.state.decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
-                </select>
+                <ComboBoxComponent data={this.state.decks} keyValue="id" value="name" selectedValue="id" onChange={this.fetchCards}></ComboBoxComponent>
             </FlashcardsContainer>
         )
     }

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import FlashcardService from '../../services/FlashcardService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faComment, faTrash, faWindowClose } from '@fortawesome/free-solid-svg-icons'
-import './style.js'
 import ReactTooltip from 'react-tooltip'
 import ModalComponent from '../../components/ModalComponent'
 import {IconStyles, IconCounter, FloatButton, FlashcardItens} from './style.js'
@@ -115,8 +114,8 @@ export default class OlderFlashcards extends Component {
                                 return (
                                     <ul>
                                         <li key={item.deck.id}>
-                                            <input id={`deck-${item.deck.id}`} type="checkbox" className="flashcard-itens"
-                                                   onClick={(event) => this.selectDeck(item.deck, event.target.checked)} checked={item.checked}/>
+                                            <FlashcardItens id={`deck-${item.deck.id}`} type="checkbox" checked={item.checked} 
+                                                            onClick={(event) => this.selectDeck(item.deck, event.target.checked)}/>
                                             <label for={`deck-${item.deck.id}`}>{item.deck.name}</label>
                                         </li>
                                         <ul>
@@ -124,9 +123,8 @@ export default class OlderFlashcards extends Component {
                                                 item.flashcards.map(flashcard => {
                                                     return (
                                                         <li key={flashcard.id}>
-                                                            <FlashcardItens id={`flashcard-${flashcard.id}`} className="flashcard-itens" checked={flashcard.checked} 
-                                                                            type="checkbox" onClick={(event) => this.selectFlashcard(flashcard, event.target.checked)}>
-                                                            </FlashcardItens>
+                                                            <FlashcardItens id={`flashcard-${flashcard.id}`} checked={flashcard.checked} style={{marginLeft: '20px'}}
+                                                                            type="checkbox" onClick={(event) => this.selectFlashcard(flashcard, event.target.checked)}/>
                                                             <label for={`flashcard-${flashcard.id}`}>{flashcard.question}</label>
                                                         </li>
                                                     )

@@ -9,7 +9,7 @@ import {Flashcard, FlashcardContent, FlashcardsButtons, FlashcardButton,
         FlashcardFront, FlashcardBack, SidedBar, SidedBarItem, FlexContainer, 
         Arrow, List} from './style'
 
-const [EASY, MEDIUM, HARD] = [1,2,3]
+const [MEDIUM, HARD] = ['2','3']
 
 export class Flashcards extends Component {
         
@@ -56,11 +56,11 @@ export class Flashcards extends Component {
 
         selectedFlashcard.flipped = false
 
-        if(difficulty == HARD && selectedFlashcard.timesCardShowUp < 4){
+        if(difficulty === HARD && selectedFlashcard.timesCardShowUp < 4){
             
             this.updateFlashcard(selectedFlashcard, flashcards);
 
-        } else if (difficulty == MEDIUM && selectedFlashcard.timesCardShowUp < 2) {
+        } else if (difficulty === MEDIUM && selectedFlashcard.timesCardShowUp < 2) {
 
             this.updateFlashcard(selectedFlashcard, flashcards);
 
@@ -108,7 +108,6 @@ export class Flashcards extends Component {
                 <p><SidedBarItem>Marked as hard:</SidedBarItem> {markedAsHard}</p>
             </SidedBar>
         )
-        return null
     }
 
     toolTip = (difficulty) => {
@@ -225,17 +224,22 @@ export class Flashcards extends Component {
     }
 
     render(){
-        const showSidePanel = this.state.flashcards.length > 0
-        return (
-            <FlexContainer>
-                {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}
-                
-                { showSidePanel ? this.sidedPanel() : null }
-                
-                {this.showFlashcard(this.state.flashcard)}                                       
-                
-            </FlexContainer>
-        )
+        let content = null
+        if(this.state.flashcards.length > 0){
+            content = (
+                <FlexContainer>
+                    {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}    
+                    
+                    {this.sidedPanel()}
+                    
+                    {this.showFlashcard(this.state.flashcard)}
+                </FlexContainer>
+            )
+        } else {
+            content = <div className="alert alert-primary">Empty deck</div>
+        }
+
+        return content
     }
        
 }

@@ -2,6 +2,17 @@ import React, { Component } from "react";
 import DeckResultTestService from "../../services/DeckResultService";
 import './style.css'
 import ModalComponent from '../../components/ModalComponent'
+import styled from 'styled-components'
+
+const Link = styled.span`
+    cursor: pointer;
+    color: #4f5d75;
+    &:hover {
+        color: blueviolet;
+        text-decoration: underline;
+    }
+`
+
 
 export default class DeckResultTest extends Component {
 
@@ -122,10 +133,10 @@ export default class DeckResultTest extends Component {
                             this.state.results.map(item => {
                                 return (
                                     <tr key={item.id}>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.id}</a></td>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.name}</a></td>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{item.deck.description}</a></td>
-                                        <td><a href="#" onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</a></td>
+                                        <td><Link onClick={() => this.selectResult(item)}>{item.id}</Link></td>
+                                        <td><Link onClick={() => this.selectResult(item)}>{item.deck.name}</Link></td>
+                                        <td><Link onClick={() => this.selectResult(item)}>{item.deck.description}</Link></td>
+                                        <td><Link onClick={() => this.selectResult(item)}>{this.dateFormat(item.timeStamp)}</Link></td>
                                     </tr>
                                 )
                             })

@@ -4,11 +4,11 @@ import FlashcardService from "../../services/FlashcardService";
 import PubSub from 'pubsub-js'
 import DeckService from "../../services/DeckService";
 import Footer from "../Footer";
+import ComboBoxComponent from "../../components/ComboBoxComponent";
 import './style.css'
 
 export class Deck extends Component {
    
-
     constructor(props){
         super(props)
         this.state = {
@@ -99,15 +99,13 @@ export class Deck extends Component {
                 <div className="container">
                     <div className="row mb-3">
                         
-                            <div className="col-md-6 deckSelection text-left">
-                                <select className="form-control" onChange={(event) => this.selectDeck(event.target.value)}>
-                                    <option key="default">Choose your deck</option>
-                                    {this.state.decks.map(deck => <option key={deck.id} value={deck.id} title={deck.description}>{deck.name}</option>)}
-                                </select>
-                            </div>
-                            <div className="col-md-6 orderDescription text-right">
-                                {this.orderByDescription()}
-                            </div>
+                        <div className="col-md-6 deckSelection text-left">
+                            <ComboBoxComponent data={this.state.decks} onChange={this.selectDeck}
+                                                keyValue="id" value="name" selectedValue="id"></ComboBoxComponent>
+                        </div>
+                        <div className="col-md-6 orderDescription text-right">
+                            {this.orderByDescription()}
+                        </div>
                         
                     </div>
                     <div style={{marginBottom: '50px'}}>
