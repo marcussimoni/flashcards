@@ -3,6 +3,7 @@ package br.com.flashcards.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,22 +31,23 @@ import br.com.flashcards.service.UserService;
 @Service
 public class DeckTestResultServiceImpl implements DeckTestResultService {
 
+	@Autowired
 	private DifficultyService difficultyService;
+	
+	@Autowired
 	private DeckTestResultRepository repository;
+	
+	@Autowired
 	private FlashcardService questionService;
+	
+	@Autowired
 	private DeckService deckService;
+	
+	@Autowired
 	private UserService userService;
+	
+	@Autowired
 	private DeckTestResultMapper deckTestResultMapper;
-
-	public DeckTestResultServiceImpl(DeckTestResultRepository repository, DifficultyService difficultyService, 
-			FlashcardService questionService, DeckService deckService, UserService userService, DeckTestResultMapper deckTestResultMapper) {
-		this.repository = repository;
-		this.difficultyService = difficultyService;
-		this.questionService = questionService;
-		this.deckService = deckService;
-		this.userService = userService;
-		this.deckTestResultMapper = deckTestResultMapper;
-	}
 	
 	@Override
 	@Transactional

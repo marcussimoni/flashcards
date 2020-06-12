@@ -2,6 +2,7 @@ package br.com.flashcards.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +20,8 @@ import br.com.flashcards.service.DeckTestResultService;
 @RequestMapping("test-result")
 public class TestResultController {
 
+	@Autowired
 	private DeckTestResultService testResultService;
-
-	public TestResultController(DeckTestResultService testResult) {
-		this.testResultService = testResult;
-	}
 	
 	@GetMapping
 	public List<TestResultDto> findAll(Pageable page){

@@ -2,6 +2,7 @@ package br.com.flashcards.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
@@ -30,12 +31,9 @@ import br.com.flashcards.service.FlashcardService;
 @RequestMapping(path = "question", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FlashcardController {
 
+	@Autowired
 	private FlashcardService service;
-	
-	public FlashcardController(FlashcardService service) {
-		this.service = service;
-	}
-	
+		
 	@Cacheable(FlashcardsContants.QUESTION)
 	@GetMapping(path = "deck/{deckId}")
 	public List<FlashcardDto> findAll(@PathVariable Long deckId, @PageableDefault(size = 100, sort = "question", direction = Direction.ASC) Pageable page) throws InterruptedException {

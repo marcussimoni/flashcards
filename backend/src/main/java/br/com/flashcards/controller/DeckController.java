@@ -2,6 +2,7 @@ package br.com.flashcards.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +22,9 @@ import br.com.flashcards.service.DeckService;
 @RequestMapping(path = "deck")
 public class DeckController {
 
+	@Autowired
 	private DeckService service;
 
-	public DeckController(DeckService service) {
-		this.service = service;
-	}
-	
 	@GetMapping
 	public List<DeckDto> findAll(Pageable page) {
 		return service.findAll(page);

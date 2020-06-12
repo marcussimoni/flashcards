@@ -2,6 +2,7 @@ package br.com.flashcards.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,8 @@ import br.com.flashcards.service.DifficultyService;
 @Service
 public class DifficultyServiceImpl implements DifficultyService {
 
+	@Autowired
 	private DifficultyRepository repository;
-
-	public DifficultyServiceImpl(DifficultyRepository repository) {
-		this.repository = repository;
-	}
 	
 	@Override
 	@Cacheable("difficulty")

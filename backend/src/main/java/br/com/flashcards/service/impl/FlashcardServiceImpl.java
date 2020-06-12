@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
@@ -32,17 +33,17 @@ import br.com.flashcards.service.UserService;
 @Service
 public class FlashcardServiceImpl implements FlashcardService {
 
+	@Autowired
 	private FlashcardRepository repository;
+	
+	@Autowired
 	private FlashcardMapper mapper;
+	
+	@Autowired
 	private DeckService deckService;
+	
+	@Autowired
 	private UserService userService;
-
-	public FlashcardServiceImpl(FlashcardRepository repository, FlashcardMapper mapper, DeckService deckService, UserService userService) {
-		this.repository = repository;
-		this.mapper = mapper;
-		this.deckService = deckService;
-		this.userService = userService;
-	}
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
