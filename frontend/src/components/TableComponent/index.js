@@ -23,18 +23,11 @@ const buildTableBody = (data) => {
     } else {
         return data.map(item => {
             return (
-                <>  
-                    <tr valign="middle" key={item.id} id={item.id}>
-                        <td><input type="checkbox" value={item.id} onChange={selectWord}></input></td>
-                        <td style={{fontWeight: '600'}}>
-                            <a href={`https://www.linguee.com.br/portugues-ingles/search?source=auto&query=${item.question}`}
-                                target="_black">
-                                {item.question}
-                            </a>
-                        </td>
-                        <td valign="middle">{item.answer}</td>
-                    </tr>
-                </>
+                <tr valign="middle" key={item.id} id={item.id}>
+                    <td><input type="checkbox" value={item.id} onChange={selectWord}></input></td>
+                    <td style={{fontWeight: '600'}}>{item.question}</td>
+                    <td valign="middle">{item.answer}</td>
+                </tr>
             )
         })
 

@@ -3,6 +3,7 @@ import Menu from "../Menu"
 import Notifications from "../Notifications"
 import {HeaderMain, HeaderMenu, HeaderContent, HeaderNotifications} from './style.js'
 import { isAuthenticated } from "../../services/auth";
+import AutenticatedUser from '../AutenticatedUser'
 
 const Header = (props) => (
     
@@ -18,6 +19,7 @@ const Header = (props) => (
             <HeaderNotifications>
                 <Notifications></Notifications>
             </HeaderNotifications>
+            <AutenticatedUser></AutenticatedUser>
         </HeaderMain>
     : 
         null

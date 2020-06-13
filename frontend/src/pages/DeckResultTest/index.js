@@ -90,8 +90,7 @@ export default class DeckResultTest extends Component {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan={this.state.result.answers.length - 1}></td>
-                                <td>
+                                <td colSpan={this.state.result.answers.length} className="text-right">
                                     Total: {this.getTotalCards()}
                                 </td>
                             </tr>
