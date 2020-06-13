@@ -12,7 +12,7 @@ To run Flashcards app you'll need the following tools installed in your workspac
 
 Execute the following commands on your terminal:
 
-1. Clone project from github `git clone https://github.com/marcussimoni/flashcards.git`
+1. Clone the repository from github `git clone https://github.com/marcussimoni/flashcards.git`
 
 2. Type `cd flashcards`  to enter into flashcards app folder. There're two folder inside project directory: frontend a backend. The frontend is the interface application created using react and the backend is the rest api server create using spring boot.
 
@@ -20,5 +20,5 @@ Execute the following commands on your terminal:
 
 4. After backend has started go to frontend folder and run: `npm install` to download all dependencies necessary to run the application and then `npm start` to initialize and open the application in your web browser. In case the app was not lauched in your browser you can type `localhost:3000/flashcards`.
 
-5. To access flashcards app type ***test@test.com*** in username field and ***test123*** in password field and click login
+5. To access flashcards app type ***test@test.com*** in email adress field and ***test123*** in password field and click login
 
