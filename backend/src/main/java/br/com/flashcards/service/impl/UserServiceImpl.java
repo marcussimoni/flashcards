@@ -8,6 +8,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.flashcards.dto.UserDto;
@@ -29,12 +30,13 @@ public class UserServiceImpl implements UserService {
 	public UserDto createAcount(UserDto dto) {
 		
 		User user = new User();
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 		
 		user.setEmail(dto.getEmail());
 		user.setFirstName(dto.getFirstName());
 		user.setLastName(dto.getLastName());
 		user.setUsername(dto.getUsername());
-		user.setPassword(dto.getPassword());
+		user.setPassword(bcrypt.encode(dto.getPassword()));
 		
 		User entity = userRepository.save(user);
 		

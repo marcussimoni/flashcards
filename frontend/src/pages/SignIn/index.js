@@ -22,7 +22,7 @@ class SignIn extends Component {
       try {
         const response = await api.post("/authentication/sign-in", { email, password });
         login(response.data.token);
-        this.props.history.push("/app");
+        window.location = '/flashcards'
       } catch (err) {
         this.setState({
           error:

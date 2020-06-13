@@ -10,23 +10,25 @@ class SignUp extends Component {
       username: "",
       email: "",
       password: "",
-      error: ""
+      error: "",
+      firstName: '',
+      lastName: ''
     };
 
     handleSignUp = async e => {
-    e.preventDefault();
-    const { username, email, password } = this.state;
-    if (!username || !email || !password) {
-        this.setState({ error: "Fill all fields" });
-    } else {
-        try {
-        await api.post("/sign-up", { username, email, password });
-        this.props.history.push("/");
-        } catch (err) {
-        console.log(err);
-        this.setState({ error: "Erro while trying to create account" });
+        e.preventDefault();
+        const { username, email, password, firstName, lastName } = this.state;
+        if (!username || !email || !password) {
+            this.setState({ error: "Fill all fields" });
+        } else {
+            api.post("authentication/sign-up", { username, email, password, firstName, lastName }).then(response => {
+                alert('account created')
+                this.props.history.push("/");
+            }, error => {
+                console.log(error);
+                this.setState({ error: "Erro while trying to create account" });
+            });
         }
-    }
     };
 
     render() {
@@ -51,6 +53,18 @@ class SignUp extends Component {
                 type="password"
                 placeholder="password"
                 onChange={e => this.setState({ password: e.target.value })}
+            />
+            <input
+                className="form-control"
+                type="text"
+                placeholder="First name"
+                onChange={e => this.setState({ firstName: e.target.value })}
+            />
+            <input
+                className="form-control"
+                type="test"
+                placeholder="Last name"
+                onChange={e => this.setState({ lastName: e.target.value })}
             />
             <button type="submit">Create account</button>
             <hr />

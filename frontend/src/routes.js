@@ -5,8 +5,6 @@ import SignUp from "./pages/SignUp"
 import SignIn from "./pages/SignIn"
 import { Deck } from "./pages/Deck";
 import { Flashcards } from "./pages/Flashcards";
-import NewDeck from "./pages/Deck/newDeck";
-import DeckResultTest from "./pages/DeckResultTest";
 import Header from "./pages/Header";
 import NewCard from "./pages/NewCard";
 import FlashcardsHeader from "./pages/Flashcards/FlashcardsHeader";
@@ -24,7 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       isAuthenticated() ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        <Redirect to={{ pathname: "/signin", state: { from: props.location } }} />
       )
     }
   />
@@ -37,19 +35,17 @@ const Routes = () => (
         <Header>
           <Switch>
             <PrivateRoute exact path="/deck" component={NewCard}/>
-            <PrivateRoute exact path="/flashcards" component={FlashcardsHeader} />
+            <PrivateRoute exact path="/" component={FlashcardsHeader} />
           </Switch>
         </Header>
 
         <Switch>
-          <Route exact path="/" component={SignIn} />
+          <Route exact path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           
           <div style={{marginTop: '130px'}}>
-            <PrivateRoute exact path="/deck/new" component={NewDeck} />
+            <PrivateRoute exact path="/" component={Flashcards} />
             <PrivateRoute exact path="/deck" component={Deck} />
-            <PrivateRoute exact path="/flashcards" component={Flashcards} />
-            <PrivateRoute exact path="/test-result" component={DeckResultTest} />
             <PrivateRoute exact path="/test-component" component={TestComponent} />
           </div>
 
