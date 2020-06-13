@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const IconStyles = styled.div`
     position: relative;
-    color: #f86348;
+    color: #fff;
     cursor: pointer;
 `
 

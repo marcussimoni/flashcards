@@ -9,7 +9,7 @@ const Main = styled.div`
 
 const ActionButtons = styled.div`
     float: right;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 `
 
 export {Main, ActionButtons}

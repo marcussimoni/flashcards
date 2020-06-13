@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DeckService from "../../services/DeckService";
-import FlashcardService from "../../services/FlashcardService";
 import PubSub from 'pubsub-js'
 import styled from 'styled-components'
 import ComboBoxComponent from "../../components/ComboBoxComponent";
@@ -29,18 +28,11 @@ export default class FlashcardsHeader extends Component {
 
     fetchCards = (deck) => {
         this.setState({deck})
-    	FlashcardService.findAll(`/question/deck/${deck}`).then(response => {
-            const flashcards = response.data.map(flashcard => {
-                return {
-                    ...flashcard,
-                    flipped: false,
-                    visible: true,
-                    difficulty: ''
-                }
-            })
-
-            PubSub.publish('flashcards', flashcards)
-        })
+        if(deck){
+            PubSub.publish('flashcards', deck)
+        } else {
+            PubSub.publish('flashcards', null)
+        }
     }    
 
     render(){

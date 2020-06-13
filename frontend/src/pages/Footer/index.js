@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../../services/api";
 import PubSub from 'pubsub-js'
 import {Main, ActionButtons} from './style.js'
+import ReactTooltip from "react-tooltip";
 
 export default class Footer extends Component {
 
@@ -32,7 +33,9 @@ export default class Footer extends Component {
             <Main>
                 <div className="container">
                     <ActionButtons>
-                        <button className="btn-circle btn-danger " onClick={this.deleteItens}><i className="fa fa-trash"></i></button>
+                        <ReactTooltip id="remove" place="left" type="dark" effect="float"/>
+                        <button data-for="remove" data-tip="Remove selected flashcards" className="btn-circle btn-danger " 
+                                onClick={this.deleteItens}><i className="fa fa-trash"></i></button>
                     </ActionButtons>
                 </div>
             </Main>

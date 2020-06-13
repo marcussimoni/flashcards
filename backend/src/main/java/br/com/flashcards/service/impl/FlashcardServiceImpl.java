@@ -113,10 +113,8 @@ public class FlashcardServiceImpl implements FlashcardService {
 	@Override
 	@Transactional
 	public void delete(List<Long> ids) {
-		for (Long id : ids) {
-			if(repository.findById(id).isPresent()) {
-				repository.deleteById(id);				
-			}
+		if(!ids.isEmpty()) {
+			repository.inactivateOldFlashcards(ids);				
 		}
 	}
 

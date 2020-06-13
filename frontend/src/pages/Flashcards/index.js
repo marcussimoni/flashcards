@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import FlashcardService from "../../services/FlashcardService";
 import { faGrinWink, faMeh, faGrinBeamSweat, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import PubSub from 'pubsub-js'
 import ReactTooltip from "react-tooltip";
 import {Flashcard, FlashcardContent, FlashcardsButtons, FlashcardButton, 
         FlashcardFront, FlashcardBack, SidedBar, SidedBarItem, FlexContainer, 
         Arrow, List} from './style'
+
+import DeckService from "../../services/DeckService";
 
 const [MEDIUM, HARD] = ['2','3']
 
@@ -24,6 +26,7 @@ export class Flashcards extends Component {
             testResultId: 0,
             redirect: false,
             decks: [],
+            deck: null,
             flashcards: [],
             selectedItens: []
         }
@@ -31,7 +34,23 @@ export class Flashcards extends Component {
 
     componentDidMount(){
         PubSub.subscribe('flashcards', (msg, data) => {
-            this.setState({flashcards: data, startedAt: new Date(), flashcard: {...data[0], visible: true}})
+            this.setState({deck: data})
+            FlashcardService.findAll(`/question/deck/${data}`).then(response => {
+                debugger
+                const flashcards = response.data.map(flashcard => {
+                    return {
+                        ...flashcard,
+                        flipped: false,
+                        visible: true,
+                        difficulty: ''
+                    }
+                })
+                this.setState({flashcards: flashcards, startedAt: new Date(), flashcard: {...data[0], visible: true}})
+            })
+        })
+
+        DeckService.findAll().then(response => {
+            this.setState({decks: response.data})
         })
 
         document.onkeydown = (event) => {
@@ -144,6 +163,19 @@ export class Flashcards extends Component {
         return this.state.flashcards.filter(flashcard => flashcard.visible);
     }
 
+    buildLiElement = (item) => {
+        const answer = item.answer
+        if(!answer){
+            return null
+        }
+        if(answer.indexOf(',') > 0){
+            return answer.split(',').map(value => <li>{value}</li>)
+        } else {
+            return answer.map(value => <li>{value}</li>)
+        }
+
+    }
+
     showFlashcard = (item) => {
 
         if(!item){
@@ -172,7 +204,7 @@ export class Flashcards extends Component {
                                 <FlashcardFront>{ item.question }</FlashcardFront>
                                 <FlashcardBack>
                                     <List>
-                                        { item.answer.split(',').map(value => <li>{value}</li>) }
+                                        { this.buildLiElement(item) }
                                     </List>
                                 </FlashcardBack>
                                 <FlashcardsButtons className="flashcardsButtons">
@@ -214,7 +246,8 @@ export class Flashcards extends Component {
 
     render(){
         let content = null
-        if(this.state.flashcards.length > 0){
+        const totalFlashcards = this.state.flashcards.length
+        if(totalFlashcards > 0){
             content = (
                 <FlexContainer>
                     {this.state.redirect ? <Redirect to={`test-result`}></Redirect> : null}    
@@ -224,11 +257,16 @@ export class Flashcards extends Component {
                     {this.showFlashcard(this.state.flashcard)}
                 </FlexContainer>
             )
-        } else {
-            content = <div className="alert alert-primary">Empty deck</div>
+        } else if (this.state.decks.length === 0) {
+            content = <div className="alert alert-primary">
+                    You don't have any deck with flashcards created. Click <Link to="deck">here </Link> 
+                    to create a new deck and add some flashcards.
+                </div>
+        } else if (this.state.deck && totalFlashcards === 0) {
+            content = <div className="alert alert-primary">The deck selected is empty. You can add some flashcards clicking <Link to="deck">here</Link> </div>
         }
 
-        return content
+        return <div className="container text-center">{content}</div>
     }
        
 }
