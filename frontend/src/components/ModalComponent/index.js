@@ -9,7 +9,7 @@ const ModalComponent = (props) => {
     if(props.close){
         closeButton = (
             <button className="btn btn-danger" onClick={props.close} data-for="close" data-tip="Close modal">
-                <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>&nbsp;
                 <span>Close</span>
                 <ReactTooltip id="close" place="top" type="dark" effect="float"/>
             </button>

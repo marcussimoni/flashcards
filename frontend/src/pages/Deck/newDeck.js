@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import DeckService from '../../services/DeckService'
+import ReactTooltip from 'react-tooltip'
 
 export default class NewDeck extends Component {
 
@@ -75,24 +76,24 @@ export default class NewDeck extends Component {
         return (
             <div>
                 <div className="new-deck-content">
-
+                    
+                    <p>Create new Deck</p>
                     <div className="col-md-12">
-                        <p>Create new Deck</p>
                         <div className="row">
-                            <input className="form-control col-md-3" onChange={this.setName}
+                            <input className="form-control col-md-5" onChange={this.setName}
                                     type="input" maxLength="100" placeholder="Name of the deck"
                                     value={this.state.deck.name}></input>
 
-                            <input className="form-control col-md-3 ml-3" type="input" onChange={this.setDescription}
+                            <input className="form-control col-md-5 ml-1" type="input" onChange={this.setDescription}
                                     maxLength="100" placeholder="Description of the deck"
                                     value={this.state.deck.description}></input>
 
-                            <button className="btn btn-primary ml-3" onClick={this.save}>
-                                <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>&nbsp;Save
+                            <button className="ml-1 btn btn-primary" onClick={this.save}>
+                                <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>&nbsp;save
                             </button>
                         </div>
                     </div>
-                    <table className="table mt-5">
+                    <table className="table table-striped text-center mt-5">
                         <thead></thead>
                         <tbody>
                             <tr>
@@ -107,10 +108,13 @@ export default class NewDeck extends Component {
                                             <td>{deck.name}</td>
                                             <td>{deck.description}</td>
                                             <td className="text-center" style={{fontSize: '12px'}}>
-                                                <button className="btn btn-warning" onClick={() => this.setToUpdate(deck)}>
+                                                <ReactTooltip id="tooltip" delayShow="100" place="top" type="dark" effect="float"/>
+                                                <button data-for="tooltip" data-tip="select deck for update"
+                                                    className="btn btn-warning" onClick={() => this.setToUpdate(deck)}>
                                                     <i className="fa fa-refresh fa-sm"></i>
                                                 </button>
-                                                <button className="btn btn-danger ml-1 fa-sm" onClick={() => this.delete(deck)}>
+                                                <button data-for="tooltip" data-tip="Delete this deck and all flashcards"
+                                                    className="btn btn-danger ml-1 fa-sm" onClick={() => this.delete(deck)}>
                                                     <i className="fa fa-trash"></i>
                                                 </button>
                                             </td>

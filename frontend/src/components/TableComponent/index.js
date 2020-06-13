@@ -41,8 +41,8 @@ const TableComponent = (data) => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Question</th>
-                        <th>Answer</th>
+                        <th>Front flashcard</th>
+                        <th>Back flashcard</th>
                     </tr>
                 </thead>
                 <tbody>

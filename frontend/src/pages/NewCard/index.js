@@ -119,10 +119,10 @@ export default class NewCard extends Component {
             <FlexContent>
                 <div className="input-group">
                     <input autoFocus id="input-question" className="form-control" type="text" 
-                           placeholder="Type your question" onChange={this.setQuestion} 
+                           placeholder="Front flashcard" onChange={this.setQuestion} 
                            onBlur={this.searchWord} value={this.state.question} autocomplete="off"/>
                     <input id="input-answer" className="form-control" 
-                           type="text" placeholder="Type your answer" 
+                           type="text" placeholder="Back flashcard" 
                            onChange={this.setAnswer} value={this.state.answer}
                            autocomplete="off"/>
                     <div className="input-group-append">
