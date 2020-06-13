@@ -12,13 +12,37 @@ To run Flashcards app you'll need the following tools installed in your workspac
 
 Execute the following commands on your terminal:
 
-1. Clone the repository from github `git clone https://github.com/marcussimoni/flashcards.git`
+Clone the repository from github with the following command: 
+ 
+```sh
+git clone https://github.com/marcussimoni/flashcards.git
+```
 
-2. Type `cd flashcards`  to enter into flashcards app folder. There're two folder inside project directory: frontend a backend. The frontend is the interface application created using react and the backend is the rest api server create using spring boot.
+Enter into flashcards app folder. There're two folder inside project directory: frontend a backend. The frontend is the interface application created using react and the backend is the rest api server create using spring boot. Next step is to package and initialize the rest api server. For this you'll need to enter backend folder and execute: 
 
-3. Next step is to package and initialize the rest api server. For this you'll need to enter `cd backend` and execute `mvn clean package -DskipTests spring-boot:repackage` and after build is completed you'll need to initialize the application executing `java -jar ./target/flashcards-0.0.1-SNAPSHOT.jar --spring.profiles.active=demo`
+```sh
+mvn clean package -DskipTests spring-boot:repackage
+```
 
-4. After backend has started go to frontend folder and run: `npm install` to download all dependencies necessary to run the application and then `npm start` to initialize and open the application in your web browser. In case the app was not lauched in your browser you can type `localhost:3000/flashcards`.
+and after build has completed you'll need to initialize the application executing 
 
-5. To access flashcards app type ***test@test.com*** in email adress field and ***test123*** in password field and click login
+```sh
+java -jar ./target/flashcards-0.0.1-SNAPSHOT.jar --spring.profiles.active=demo
+```
+   
+
+After backend has started go to frontend folder and run: 
+```sh
+npm install
+``` 
+to download all dependencies necessary to run the application and then 
+```sh
+npm start
+```
+to initialize and open the application in your web browser. In case the app was not lauched in your browser you can type 
+```sh
+localhost:3000/flashcards
+```
+
+To access flashcards app type ***test@test.com*** in email adress field and ***test123*** in password field and click login
 
