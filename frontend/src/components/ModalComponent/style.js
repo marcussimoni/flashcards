@@ -25,4 +25,9 @@ const ModalMain = styled.div `
     border-radius: 10px;
 `
 
-export {ModalContent, ModalMain}
+const ModalFooter = styled.div`
+    width: 100%;
+    text-align: right;
+`
+
+export {ModalContent, ModalMain, ModalFooter }

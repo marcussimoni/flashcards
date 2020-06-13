@@ -5,7 +5,12 @@ import PubSub from 'pubsub-js'
 import DeckService from "../../services/DeckService";
 import Footer from "../Footer";
 import ComboBoxComponent from "../../components/ComboBoxComponent";
-import './style.css'
+import { SortLink } from './style'
+import ReactTooltip from "react-tooltip";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import ModalComponent from '../../components/ModalComponent'
+import NewDeck from "./newDeck";
 
 export class Deck extends Component {
    
@@ -20,7 +25,8 @@ export class Deck extends Component {
                 text: ''
             }, 
             deck: 0,
-            urlConfig: {}
+            urlConfig: {},
+            showModalDeck: false
         }
 
         window.onkeydown = (event) => {
@@ -28,15 +34,7 @@ export class Deck extends Component {
             const CTRL_ALT_PRESSED = event.ctrlKey && event.altKey
 
             if(CTRL_ALT_PRESSED && event.keyCode === LETTER_T){
-                const urlConfig = this.state.urlConfig();
-                
-                if(urlConfig.url === this.orderByQuestion().url){
-                    this.setState({urlConfig: this.orderByTimeStamp})
-                } else {
-                    this.setState({urlConfig: this.orderByQuestion})
-                }
-
-                this.findAll(urlConfig.url)
+                this.changeListOrder();
             }
         }
     }
@@ -57,6 +55,17 @@ export class Deck extends Component {
 
     subscribe = (msg, data) => {
         this.findAll()
+    }
+
+    changeListOrder = () => {
+        const urlConfig = this.state.urlConfig();
+        if (urlConfig.url === this.orderByQuestion().url) {
+            this.setState({ urlConfig: this.orderByTimeStamp });
+        }
+        else {
+            this.setState({ urlConfig: this.orderByQuestion });
+        }
+        this.findAll(urlConfig.url);
     }
 
     componentWillMount(){
@@ -93,18 +102,43 @@ export class Deck extends Component {
         return this.state.urlConfig().description
     }
 
+    manageDecks = () => {
+        this.setState({showModalDeck: true})
+    }
+
+    closeModal = () => {
+        this.setState({showModalDeck: false})
+        this.findAllDecks()
+    }
+
     render(){
+        let modalDeck = null
+        
+        if(this.state.showModalDeck){
+            modalDeck = (
+                <ModalComponent close={() => this.closeModal()}>
+                    <NewDeck></NewDeck>
+                </ModalComponent>
+            )
+        }
+
         return (
             <>  
+                {modalDeck}
                 <div className="container">
-                    <div className="row mb-3">
+                    <div className="row col-md-12 mb-3">
                         
-                        <div className="col-md-6 deckSelection text-left">
+                        <div className="row col-md-6 text-left">
                             <ComboBoxComponent data={this.state.decks} onChange={this.selectDeck}
                                                 keyValue="id" value="name" selectedValue="id"></ComboBoxComponent>
+                            <button onClick={this.manageDecks} className="btn btn-info ml-2" data-for="new-deck" data-tip="Add/remove decks">
+                                <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+                                <ReactTooltip id="new-deck" delayShow="100" place="top" type="dark" effect="float"/>
+                            </button>                    
                         </div>
-                        <div className="col-md-6 orderDescription text-right">
-                            {this.orderByDescription()}
+                        <div className="col-md-6 text-right">
+                            <SortLink onClick={() => this.changeListOrder()}  data-for="sort" data-tip="Change sort of flashcards (ctrl + alt + t)">{this.orderByDescription()}</SortLink>
+                            <ReactTooltip id="sort" delayShow="100" place="top" type="dark" effect="float"/>
                         </div>
                         
                     </div>
