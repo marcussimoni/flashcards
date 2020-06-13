@@ -29,17 +29,21 @@ and after build has completed you'll need to initialize the application executin
 ```sh
 java -jar ./target/flashcards-0.0.1-SNAPSHOT.jar --spring.profiles.active=demo
 ```
-   
 
-After backend has started go to frontend folder and run: 
+After backend has started go to frontend folder and run the following command to download all dependencies necessary to run the application
+
 ```sh
 npm install
 ``` 
-to download all dependencies necessary to run the application and then 
+
+to initialize and open the application in your web browser execute the next command
+
 ```sh
 npm start
 ```
-to initialize and open the application in your web browser. In case the app was not lauched in your browser you can type 
+
+the frontend run on 
+
 ```sh
 localhost:3000/flashcards
 ```
