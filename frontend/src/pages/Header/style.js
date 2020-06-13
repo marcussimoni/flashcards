@@ -22,7 +22,7 @@ const HeaderContent = styled.div`
 ` 
 
 const HeaderNotifications = styled.div`
-    width: 10%;
+    
 ` 
 
 export {HeaderMain, HeaderMenu, HeaderContent, HeaderNotifications}
