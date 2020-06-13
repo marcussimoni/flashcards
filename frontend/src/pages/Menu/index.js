@@ -18,7 +18,7 @@ const Menu = () => {
                 </Link>
             </li>
             <li>
-                <Link to="/flashcards" data-for="tooltip" data-tip="Start study with flashcards">
+                <Link to="/" data-for="tooltip" data-tip="Start study with flashcards">
                     <LinkComponent>
                         <FontAwesomeIcon icon={faIdCard}></FontAwesomeIcon>
                         &nbsp;Flashcards
