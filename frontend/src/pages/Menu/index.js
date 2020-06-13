@@ -1,40 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList } from "@fortawesome/free-solid-svg-icons";
-import {MenuContent, ItemMenu, Content, MenuIcon, List} from './style';
+import { faIdCard, faListAlt } from "@fortawesome/free-solid-svg-icons";
+import { LinkComponent, Ul } from './style';
+import ReactTooltip from "react-tooltip";
 
 const Menu = () => {
     return (
-        <Content>
-            <MenuIcon>
-                <FontAwesomeIcon icon={faList}></FontAwesomeIcon>
-                <MenuContent>
-                    <List>
-                        <li>
-                            <ItemMenu>
-                                <Link className="link" to="/deck/new">New deck</Link>
-                            </ItemMenu>
-                        </li> 
-                        <li>
-                            <ItemMenu>
-                                <Link className="link" to="/deck">Decks</Link>
-                            </ItemMenu>
-                        </li>
-                        <li>
-                            <ItemMenu>
-                                <Link className="link" to="/flashcards">Flashcards</Link>
-                            </ItemMenu>
-                        </li>
-                        <li>
-                            <ItemMenu>
-                                <Link className="link" to="/test-result">Test results</Link>
-                            </ItemMenu>
-                        </li>
-                    </List>
-                </MenuContent>
-            </MenuIcon>
-        </Content>
+        <Ul>
+            <ReactTooltip id="tooltip" delayShow="300" place="right" type="dark" effect="float"/>
+            <li>
+                <Link to="/deck" data-for="tooltip" data-tip="List created decks">
+                    <LinkComponent>
+                        <FontAwesomeIcon icon={faListAlt}></FontAwesomeIcon>
+                        &nbsp;Decks
+                    </LinkComponent>
+                </Link>
+            </li>
+            <li>
+                <Link to="/flashcards" data-for="tooltip" data-tip="Start study with flashcards">
+                    <LinkComponent>
+                        <FontAwesomeIcon icon={faIdCard}></FontAwesomeIcon>
+                        &nbsp;Flashcards
+                    </LinkComponent>
+                </Link>
+            </li>
+        </Ul>
     )
 }
 

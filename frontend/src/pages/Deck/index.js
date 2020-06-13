@@ -130,6 +130,7 @@ export class Deck extends Component {
                         
                         <div className="row col-md-6 text-left">
                             <ComboBoxComponent data={this.state.decks} onChange={this.selectDeck}
+                                                defaultItem="Select deck to add flashcards"
                                                 keyValue="id" value="name" selectedValue="id"></ComboBoxComponent>
                             <button onClick={this.manageDecks} className="btn btn-info ml-2" data-for="new-deck" data-tip="Add/remove decks">
                                 <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>

@@ -1,16 +1,23 @@
 import styled from 'styled-components'
 
-const HeaderMain = styled.div`
-    display: flex;
-    align-items: center;
+const Container = styled.div`
     width: 100%;
-    height: 100px;
+    padding-right: 15px;
+    padding-left: 15px;
     background-color: #4f5d75;
     position: fixed;
     top: 0;
     box-shadow: 1px 5px 5px #aaa;
     z-index: 1;
+`
 
+    const HeaderMain = styled.div`
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
 `
 
 const HeaderMenu = styled.div`
@@ -25,4 +32,4 @@ const HeaderNotifications = styled.div`
     
 ` 
 
-export {HeaderMain, HeaderMenu, HeaderContent, HeaderNotifications}
+export {Container, HeaderMain, HeaderMenu, HeaderContent, HeaderNotifications}

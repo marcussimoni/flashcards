@@ -46,7 +46,8 @@ export default class FlashcardsHeader extends Component {
     render(){
         return (
             <FlashcardsContainer>
-                <ComboBoxComponent data={this.state.decks} keyValue="id" value="name" selectedValue="id" onChange={this.fetchCards}></ComboBoxComponent>
+                <ComboBoxComponent defaultItem="Select deck to start study" data={this.state.decks} keyValue="id" 
+                value="name" selectedValue="id" onChange={this.fetchCards}></ComboBoxComponent>
             </FlashcardsContainer>
         )
     }
