@@ -132,12 +132,7 @@ public class FlashcardServiceImpl implements FlashcardService {
 
 	@Override
 	public void deleteByDeck(Deck deck) {
-		List<Flashcard> questions = repository.findByDeck(deck);
-		
-		if(!questions.isEmpty()) {
-			repository.deleteAll(questions);
-		}
-		
+		repository.inactivateFlashcards(deck);
 	}
 
 	@Override

@@ -114,16 +114,6 @@ export class Flashcards extends Component {
         return `Mark this card as ${difficulty} difficulty`
     }
 
-    seconds = 0;
-
-    startTimer = () => {
-        if(this.state.flashcards.length > 0){
-            return setInterval(() => {
-                return <div style={{position: 'fixed', right: '0', width: '100px'}}>{++this.seconds}</div>
-            }, 1000);
-        }
-    }
-
     moveToNext = (item) => {
         const flashcards = this.getVisibleFlashcards()
         const index = this.getIndex(flashcards, item)
@@ -208,7 +198,6 @@ export class Flashcards extends Component {
                         <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
                     </Arrow>
                 </div>
-
 
             </div>
                     

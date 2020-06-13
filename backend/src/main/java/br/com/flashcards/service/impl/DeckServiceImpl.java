@@ -67,7 +67,7 @@ public class DeckServiceImpl implements DeckService {
 	public DeckDto remove(Long id) {
 		Deck deck = findDeckById(id);
 		questionService.deleteByDeck(deck);
-		repository.delete(deck);
+		repository.inactivateDeck(deck);
 		return mapper.entityToDto(deck);
 	}
 

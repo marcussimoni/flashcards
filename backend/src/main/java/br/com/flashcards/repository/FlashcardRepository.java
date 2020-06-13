@@ -39,6 +39,9 @@ public interface FlashcardRepository extends PagingAndSortingRepository<Flashcar
 	@Modifying
 	@Query("UPDATE Flashcard f SET f.timeStamp = :data WHERE f.id IN :ids")
 	void updateTimeStampFlashcards(@Param("data") LocalDateTime data, @Param("ids") List<Long> flashcardsId);
-
+	
+	@Modifying
+	@Query("UPDATE Flashcard f SET f.active = false WHERE f.deck = :deck")
+	void inactivateFlashcards(@Param("deck") Deck deck);
 	
 }
