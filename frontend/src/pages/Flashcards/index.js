@@ -69,18 +69,18 @@ export class Flashcards extends Component {
     }
 
     setDifficulty = (selectedFlashcard, difficulty) => {
-        
+
         let flashcards = [...this.state.flashcards]
 
         selectedFlashcard.flipped = false
 
         if(difficulty === HARD && selectedFlashcard.timesCardShowUp < 4){
             
-            this.updateFlashcard(selectedFlashcard, flashcards);
+            this.updateFlashcard(selectedFlashcard, flashcards, difficulty);
 
         } else if (difficulty === MEDIUM && selectedFlashcard.timesCardShowUp < 2) {
 
-            this.updateFlashcard(selectedFlashcard, flashcards);
+            this.updateFlashcard(selectedFlashcard, flashcards, difficulty);
 
         } else {
 
@@ -112,7 +112,6 @@ export class Flashcards extends Component {
     }
 
     sidedPanel = () => {
-        debugger
         const flashcards = [...this.state.flashcards]
         const visible = flashcards.filter(flashcard => !flashcard.visible).length
         const markedAsEasy = flashcards.filter(flashcard => flashcard.difficulty === '1').length
@@ -171,9 +170,8 @@ export class Flashcards extends Component {
         if(answer.indexOf(',') > 0){
             return answer.split(',').map(value => <li>{value}</li>)
         } else {
-            return answer.map(value => <li>{value}</li>)
+            return <li>{answer}</li>
         }
-
     }
 
     showFlashcard = (item) => {
@@ -236,9 +234,9 @@ export class Flashcards extends Component {
         )
     }
  
-    updateFlashcard(selectedFlashcard, flashcards) {
+    updateFlashcard(selectedFlashcard, flashcards, difficulty) {
         selectedFlashcard.timesCardShowUp++;
-        selectedFlashcard.difficulty = HARD;
+        selectedFlashcard.difficulty = difficulty;
         const index = this.getIndex(flashcards, selectedFlashcard);
         flashcards.splice(index, 1);
         flashcards.push(selectedFlashcard);
