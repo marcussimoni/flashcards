@@ -34,9 +34,8 @@ export class Flashcards extends Component {
 
     componentDidMount(){
         PubSub.subscribe('flashcards', (msg, data) => {
-            this.setState({deck: data})
+            
             FlashcardService.findAll(`/question/deck/${data}`).then(response => {
-                debugger
                 const flashcards = response.data.map(flashcard => {
                     return {
                         ...flashcard,
@@ -45,7 +44,7 @@ export class Flashcards extends Component {
                         difficulty: ''
                     }
                 })
-                this.setState({flashcards: flashcards, startedAt: new Date(), flashcard: {...data[0], visible: true}})
+                this.setState({flashcards: flashcards, startedAt: new Date(), flashcard: {...flashcards[0], visible: true}, deck: data})
             })
         })
 
@@ -113,6 +112,7 @@ export class Flashcards extends Component {
     }
 
     sidedPanel = () => {
+        debugger
         const flashcards = [...this.state.flashcards]
         const visible = flashcards.filter(flashcard => !flashcard.visible).length
         const markedAsEasy = flashcards.filter(flashcard => flashcard.difficulty === '1').length
@@ -185,10 +185,10 @@ export class Flashcards extends Component {
         return (
             <div className="row">
 
-                <ReactTooltip id="tooltip-top" delayShow="300" place="top" type="dark" effect="float"/>
-                <ReactTooltip id="tooltip-right" delayShow="300" place="right" type="dark" effect="float"/>
-                <ReactTooltip id="tooltip-left" delayShow="300" place="left" type="dark" effect="float"/>
-                <ReactTooltip id="tooltip-bottom" delayShow="300" place="bottom" type="dark" effect="float"/>
+                <ReactTooltip id="tooltip-top" delayShow={300} place="top" type="dark" effect="float"/>
+                <ReactTooltip id="tooltip-right" delayShow={300} place="right" type="dark" effect="float"/>
+                <ReactTooltip id="tooltip-left" delayShow={300} place="left" type="dark" effect="float"/>
+                <ReactTooltip id="tooltip-bottom" delayShow={300} place="bottom" type="dark" effect="float"/>
 
                 <div style={{display: 'flex', alignItems: 'center'}}>
 
@@ -213,9 +213,9 @@ export class Flashcards extends Component {
                                     <FlashcardButton data-for="medium" data-tip={this.toolTip('a medium')} type="medium" key={'normal'} onClick={() => this.setDifficulty(item, '2')}><FontAwesomeIcon icon={faMeh}/></FlashcardButton>
                                     <FlashcardButton data-for="hard" data-tip={this.toolTip('a hard')} type="hard" key={'hard'} onClick={() => this.setDifficulty(item, '3')}><FontAwesomeIcon icon={faGrinBeamSweat}/></FlashcardButton>
 
-                                    <ReactTooltip id="easy" delayShow="300" place="left" type="dark" effect="float"/>
-                                    <ReactTooltip id="medium" delayShow="300" place="bottom" type="dark" effect="float"/>
-                                    <ReactTooltip id="hard" delayShow="300" place="right" type="dark" effect="float"/>
+                                    <ReactTooltip id="easy" delayShow={300} place="left" type="dark" effect="float"/>
+                                    <ReactTooltip id="medium" delayShow={300} place="bottom" type="dark" effect="float"/>
+                                    <ReactTooltip id="hard" delayShow={300} place="right" type="dark" effect="float"/>
 
                                 </FlashcardsButtons>
                             </div>

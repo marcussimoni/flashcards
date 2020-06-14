@@ -98,7 +98,7 @@ export default class OlderFlashcards extends Component {
                         <div data-tip="Check older flashcard" onClick={this.checkOlderFlashcards}>
                             <IconCounter className="icon-counter">{this.getTotalFlashcards()}</IconCounter>
                             <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
-                            <ReactTooltip delayShow="300" place="left" type="dark" effect="float"></ReactTooltip>
+                            <ReactTooltip delayShow={300} place="left" type="dark" effect="float"></ReactTooltip>
                         </div>
                         : null
                     }
@@ -142,7 +142,7 @@ export default class OlderFlashcards extends Component {
                             <button className="btn btn-primary" onClick={this.closeModal} data-tip="Close modal" data-for="float-buttons">
                                 <FontAwesomeIcon icon={faWindowClose}></FontAwesomeIcon>
                             </button>
-                            <ReactTooltip id="float-buttons" delayShow="100" place="top" type="dark" effect="float"></ReactTooltip>
+                            <ReactTooltip id="float-buttons" delayShow={100} place="top" type="dark" effect="float"></ReactTooltip>
                         </FloatButton>
                     </ModalComponent> : null
                 }

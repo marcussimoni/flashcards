@@ -34,7 +34,7 @@ export default class AutenticatedUser extends Component {
             <AutenticatedUserContent>
                 <AutenticatedUserName>{this.getUsername()}</AutenticatedUserName>
                 <AutenticatedUserLogout onClick={this.logginout} data-for="logout" data-tip="Logout session">Logout</AutenticatedUserLogout>
-                <ReactTooltip id="logout" delayShow="300" place="left" type="dark" effect="float"/>
+                <ReactTooltip id="logout" delayShow={300} place="left" type="dark" effect="float"/>
             </AutenticatedUserContent>
         )
     }

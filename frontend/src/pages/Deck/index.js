@@ -134,12 +134,12 @@ export class Deck extends Component {
                                                 keyValue="id" value="name" selectedValue="id"></ComboBoxComponent>
                             <button onClick={this.manageDecks} className="btn btn-info ml-2" data-for="new-deck" data-tip="Add/remove decks">
                                 <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                                <ReactTooltip id="new-deck" delayShow="100" place="top" type="dark" effect="float"/>
+                                <ReactTooltip id="new-deck" delayShow={100} place="top" type="dark" effect="float"/>
                             </button>                    
                         </div>
                         <div className="col-md-6 text-right">
                             <SortLink onClick={() => this.changeListOrder()}  data-for="sort" data-tip="Change sort of flashcards (ctrl + alt + t)">{this.orderByDescription()}</SortLink>
-                            <ReactTooltip id="sort" delayShow="100" place="top" type="dark" effect="float"/>
+                            <ReactTooltip id="sort" delayShow={100} place="top" type="dark" effect="float"/>
                         </div>
                         
                     </div>

@@ -108,7 +108,7 @@ export default class NewDeck extends Component {
                                             <td>{deck.name}</td>
                                             <td>{deck.description}</td>
                                             <td className="text-center" style={{fontSize: '12px'}}>
-                                                <ReactTooltip id="tooltip" delayShow="100" place="top" type="dark" effect="float"/>
+                                                <ReactTooltip id="tooltip" delayShow={100} place="top" type="dark" effect="float"/>
                                                 <button data-for="tooltip" data-tip="select deck for update"
                                                     className="btn btn-warning" onClick={() => this.setToUpdate(deck)}>
                                                     <i className="fa fa-refresh fa-sm"></i>

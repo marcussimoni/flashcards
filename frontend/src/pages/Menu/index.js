@@ -8,7 +8,7 @@ import ReactTooltip from "react-tooltip";
 const Menu = () => {
     return (
         <Ul>
-            <ReactTooltip id="tooltip" delayShow="300" place="right" type="dark" effect="float"/>
+            <ReactTooltip id="tooltip" delayShow={300} place="right" type="dark" effect="float"/>
             <li>
                 <Link to="/deck" data-for="tooltip" data-tip="List created decks">
                     <LinkComponent>

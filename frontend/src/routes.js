@@ -15,6 +15,10 @@ const contentStyle = {
   fontSize: '26px !important',
 }
 
+const marginTop = {
+  marginTop: '130px'
+}
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -39,18 +43,18 @@ const Routes = () => (
           </Switch>
         </Header>
 
-        <Switch>
-          <Route exact path="/signin" component={SignIn} />
-          <Route path="/signup" component={SignUp} />
-          
-          <div style={{marginTop: '130px'}}>
-            <PrivateRoute exact path="/" component={Flashcards} />
-            <PrivateRoute exact path="/deck" component={Deck} />
-            <PrivateRoute exact path="/test-component" component={TestComponent} />
-          </div>
+        <div style={marginTop}>
+          <Switch>
+            <Route exact path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            
+              <PrivateRoute exact path="/" component={Flashcards} />
+              <PrivateRoute exact path="/deck" component={Deck} />
+              <PrivateRoute exact path="/test-component" component={TestComponent} />
 
-          <Route path="*" component={() => <h1>Page not found</h1>} />
-        </Switch>
+            <Route path="*" component={() => <h1>Page not found</h1>} />
+          </Switch>
+        </div>
       </BrowserRouter>
     </div>
 
