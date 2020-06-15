@@ -8,7 +8,9 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - springcloud
+      - flashcards-network
+    volumes:
+      - ./database:/var/lib/postgresql
       
   pgAdmin-server:
     image: dpage/pgadmin4
@@ -20,8 +22,21 @@ services:
     depends_on:
       - postgres-server
     networks:
-      - springcloud
+      - flashcards-network
+
+  backend-server:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    image: flashcards/flashcards-backend
+    ports: 
+      - "8081:8081"
+    networks:
+      - flashcards-network
+    environment: 
+      SPRING_PROFILES_ACTIVE: prod
+      SERVER_PORT: 8081  
 
 networks: 
-  springcloud:
+  flashcards-network:
     driver: bridge
