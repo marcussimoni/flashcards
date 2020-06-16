@@ -8,14 +8,14 @@ import br.com.flashcards.model.User;
 
 public interface UserService {
 
-	public UserDto createAcount(UserDto dto);
+	UserDto createAcount(UserDto dto);
 
-	public User findById(Long userId);
+	User findById(Long userId);
 	
-	public Optional<User> findByUsername(String username);
+	Optional<User> findByUsername(String username);
 
-	public List<UserDto> findAll();
+	List<UserDto> findAll();
 	
-	public User userAuthenticated();
+	User userAuthenticated();
 	
 }
