@@ -27,7 +27,7 @@ mvn clean package -DskipTests spring-boot:repackage
 and after build has completed you'll need to initialize the application executing 
 
 ```sh
-java -jar ./target/flashcards-0.0.1-SNAPSHOT.jar --spring.profiles.active=demo
+java -jar ./target/flashcards.jar --spring.profiles.active=demo
 ```
 
 After backend has started go to frontend folder and run the following command to download all dependencies necessary to run the application
