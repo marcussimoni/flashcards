@@ -1,5 +1,6 @@
 package br.com.flashcards.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,8 @@ public class FlashcardController {
 	
 	@GetMapping(path = "older-flashcards")
 	public List<OlderFlashcardDto> findAllOlderThan(){
-		return service.findAllOlderThan();
+		LocalDateTime date = LocalDateTime.now().minusDays(7L);
+		return service.findAllOlderThan(date);
 	}
 	
 	@PutMapping(path = "older-flashcards")

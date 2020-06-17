@@ -71,12 +71,7 @@ public class FlashcardServiceImpl implements FlashcardService {
 	private void capitalizeQuestion(Flashcard entity) {
 		String question = entity.getQuestion();
 		
-		if(Objects.nonNull(question)) {
-
-			entity.setQuestion(StringUtils.capitalize(question.trim().toLowerCase()));
-			
-		}
-		
+		entity.setQuestion(StringUtils.capitalize(question.trim().toLowerCase()));
 	}
 
 	private Optional<FlashcardDto> validateQuestion(FlashcardDto dto) {
@@ -96,11 +91,7 @@ public class FlashcardServiceImpl implements FlashcardService {
 		if(questions == 1) {
 			return Optional.of(findQuestion(dto.getDeck().getId(), question));
 		}
-				
-		if(questions > 1) {
-			throw new FlashcardException("Question already exists");			
-		}
-		
+					
 		return Optional.empty();
 	}
 
@@ -140,9 +131,8 @@ public class FlashcardServiceImpl implements FlashcardService {
 	}
 
 	@Override
-	public List<OlderFlashcardDto> findAllOlderThan() {
+	public List<OlderFlashcardDto> findAllOlderThan(LocalDateTime date) {
 		User user = userService.userAuthenticated();
-		LocalDateTime date = LocalDateTime.now().minusDays(7L);
 		
 		List<FlashcardDto> list = mapper.entityToDto(repository.findAllOlderThan(user, date));
 		List<OlderFlashcardDto> flashcards = new ArrayList<>();

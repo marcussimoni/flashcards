@@ -1,5 +1,6 @@
 package br.com.flashcards.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public interface FlashcardService {
 	FlashcardDto findQuestion(Long deckId, String question);
 	void deleteByDeck(Deck deck);
 	Optional<Flashcard >findById(Long id);
-	List<OlderFlashcardDto> findAllOlderThan();
+	List<OlderFlashcardDto> findAllOlderThan(LocalDateTime date);
 	void removeOldFlashcards(List<OlderFlashcardDto> flashcards);
 	
 }

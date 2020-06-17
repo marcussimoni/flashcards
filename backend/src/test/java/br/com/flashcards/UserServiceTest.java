@@ -1,9 +1,11 @@
 package br.com.flashcards;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,7 @@ public class UserServiceTest extends JUnitTestConfig {
 
 	@Autowired
 	private UserService service;
-	
+		
 	@Test
 	public void mustCreateAccount() {
 		UserDto dto = userDtoBuilder();
@@ -33,6 +35,24 @@ public class UserServiceTest extends JUnitTestConfig {
 		UserDto dto = createdForTest();
 		Assert.assertNotNull(service.findById(dto.getId()));
 	}
+	
+	@Test(expected = Exception.class)
+	public void mustThrowExceptionIfIdNotExists() {
+		Assert.assertNotNull(service.findById(99L));
+	}
+	
+	@Test
+	public void mustFindAll() {
+		List<UserDto> list = service.findAll();
+		Assertions.assertFalse(list.isEmpty());
+	}
+	
+	/*
+	 * @Test
+	 * 
+	 * @WithMockUser public void mustFindAuthenticatedUser() { User user =
+	 * service.userAuthenticated(); Assertions.assertNotNull(user); }
+	 */
 	
 	private UserDto createdForTest() {
 		return service.createAcount(userDtoBuilder());

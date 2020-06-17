@@ -5,12 +5,14 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.flashcards.dto.DeckDto;
+import br.com.flashcards.exception.FlashcardException;
 import br.com.flashcards.service.DeckService;
 
 @Transactional
@@ -40,6 +42,33 @@ public class DeckTests extends JUnitTestConfig {
 		DeckDto deckDto2 = buildDeck();
 		Assert.assertEquals(deckDto.getDescription(), deckDto2.getDescription());
 	}
+	
+	@Test(expected = FlashcardException.class)
+	public void mustThrowExceptionIfIdNotExists() {
+		service.findById(99L);
+	}
+	
+	@Test
+	public void mustDeleteDeck() {
+		DeckDto dto = buildDeck();
+		DeckDto entity = service.save(dto);
+		
+		service.remove(entity.getId());
+	}
+	
+	@Test
+	public void mustUpdateDeck() {
+		DeckDto dto = buildDeck();
+		DeckDto entity = service.save(dto);
+		
+		String updatedName = "updated";
+		
+		entity.setName(updatedName);
+		
+		DeckDto updated = service.update(entity.getId(), entity);
+		
+		Assertions.assertEquals(updated.getName(), updatedName);
+	}
 
 	private DeckDto createdForTest() {
 		return service.save(buildDeck());
@@ -52,7 +81,7 @@ public class DeckTests extends JUnitTestConfig {
 		Assert.assertEquals(list.size(), 1);
 	}
 
-	private DeckDto buildDeck() {
+	public static DeckDto buildDeck() {
 		DeckDto dto = new DeckDto();
 		dto.setName("Deck test");
 		dto.setDescription("Creating new deck with junit");
