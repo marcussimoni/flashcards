@@ -33,22 +33,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<!-- <exclusions> -->
-			<!-- <exclusion> -->
-			<!-- <groupId>org.junit.vintage</groupId> -->
-			<!-- <artifactId>junit-vintage-engine</artifactId> -->
-			<!-- </exclusion> -->
-			<!-- </exclusions> -->
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -190,11 +182,19 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.10.0</version>
 				<configuration>
-					<nodeVersion>v12.16.1</nodeVersion>
-					<npmVersion>6.13.4</npmVersion>
 					<workingDirectory>../frontend/</workingDirectory>
 				</configuration>
 				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v12.16.1</nodeVersion>
+							<npmVersion>6.13.4</npmVersion>
+						</configuration>
+					</execution>
 					<execution>
 						<id>npm install</id>
 						<goals>
@@ -213,22 +213,22 @@
 				</executions>
 			</plugin>
 			<plugin>
-			  <artifactId>maven-antrun-plugin</artifactId>
-			  <executions>
-			      <execution>
-			          <phase>generate-resources</phase>
-			          <configuration>
-			              <target>
-			                  <copy todir="${project.build.directory}/classes/static">
-			                      <fileset dir="${project.basedir}/../frontend/build" />
-			                  </copy>
-			              </target>
-			          </configuration>
-			          <goals>
-			              <goal>run</goal>
-			          </goals>
-			      </execution>
-			  </executions>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<configuration>
+							<target>
+								<copy todir="${project.build.directory}/classes/static">
+									<fileset dir="${project.basedir}/../frontend/build" />
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 
