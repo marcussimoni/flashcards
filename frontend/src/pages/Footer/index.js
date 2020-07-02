@@ -20,7 +20,7 @@ export default class Footer extends Component {
         if(this.selectedItens.length === 0){
             return
         }
-        api.delete('/question', { data: this.selectedItens }).then(response => {
+        api.delete('/flashcards', { data: this.selectedItens }).then(response => {
             PubSub.publish('refresh-listing', true)
             this.selectedItens = []
         }).catch(error => {

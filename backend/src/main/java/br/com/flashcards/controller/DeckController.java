@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.flashcards.constants.Urls;
 import br.com.flashcards.dto.DeckDto;
 import br.com.flashcards.service.DeckService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "deck")
+@RequestMapping(path = Urls.API_BASE + "deck")
 public class DeckController {
 
 	@Autowired

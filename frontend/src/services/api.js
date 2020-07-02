@@ -3,7 +3,7 @@ import { getToken, logout } from "./auth";
 import PubSub from 'pubsub-js'
 
 const api = axios.create({
-  baseURL: "http://localhost:8080"
+  baseURL: "http://localhost:8080/flashcards/resources"
 });
 
 api.interceptors.response.use(response => {

@@ -35,7 +35,7 @@ export class Flashcards extends Component {
     componentDidMount(){
         PubSub.subscribe('flashcards', (msg, data) => {
             
-            FlashcardService.findAll(`/question/deck/${data}`).then(response => {
+            FlashcardService.findAll(`/flashcards/deck/${data}`).then(response => {
                 const flashcards = response.data.map(flashcard => {
                     return {
                         ...flashcard,

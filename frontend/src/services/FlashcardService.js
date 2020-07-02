@@ -10,11 +10,11 @@ const FlashcardService = {
     },
 
     findAllOlderThan: () => {
-        return api.get('question/older-flashcards')
+        return api.get('flashcards/older-flashcards')
     }, 
 
     removeOldFlashcards: (flashcards) => {
-        return api.put('question/older-flashcards', flashcards)
+        return api.put('flashcards/older-flashcards', flashcards)
     }
 }
 

@@ -14,9 +14,10 @@ import br.com.flashcards.model.User;
 
 public interface DeckRepository extends CrudRepository<Deck, Long>{
 
-	@Query("SELECT NEW br.com.flashcards.dto.DeckDto(d.id, d.name, d.description, d.active, COUNT(f)) "
+	@Query("SELECT NEW br.com.flashcards.dto.DeckDto(d.id, d.name, d.description, d.active, "
+		 + "SUM(CASE WHEN (f.active = true) THEN 1 ELSE 0 END)) "
 		 + "FROM Deck d LEFT JOIN d.flashcards f "
-		 + "WHERE d.user = :user AND d.active = true AND f.active = true GROUP BY d.id")
+		 + "WHERE d.user = :user AND d.active = true GROUP BY d.id")
 	List<DeckDto> findAll(@Param("user") User user, Pageable page);
 
 	@Modifying

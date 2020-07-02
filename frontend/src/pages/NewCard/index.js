@@ -37,7 +37,7 @@ export default class NewCard extends Component {
             }
         }
         
-        api.post('/question', question).then(resp => {
+        api.post('/flashcards', question).then(resp => {
             PubSub.publish('refresh-listing', resp)
             this.clearInputText();
             this.setFocusOnInputQuestion()
@@ -96,7 +96,7 @@ export default class NewCard extends Component {
             return
         }
 
-        api.get(`question/deck/3/question/${question}`).then(response => {
+        api.get(`flashcards/deck/3/question/${question}`).then(response => {
             this.clearInputText()
             this.setFocusOnInputQuestion()
             this.scrollToElement(response.data.id)

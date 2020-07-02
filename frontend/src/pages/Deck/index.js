@@ -42,14 +42,14 @@ export class Deck extends Component {
     orderByQuestion = () => {
         return {
             description: 'Ordered by question',
-            url: `/question/deck/${this.state.deck}`
+            url: `/flashcards/deck/${this.state.deck}`
         }
     }
 
     orderByTimeStamp = () => {
         return {
             description: 'Ordered by timestamp',
-            url: `/question/deck/${this.state.deck}?sort=timeStamp,DESC`
+            url: `/flashcards/deck/${this.state.deck}?sort=timeStamp,DESC`
         }
     }
 

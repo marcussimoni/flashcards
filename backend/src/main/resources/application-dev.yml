@@ -7,14 +7,14 @@ spring:
   application:
     name: 'flashcards'
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/flashcards
+    username: postgres
+    password: admin
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
   jpa:
-    show-sql: false
+    show-sql: true
     properties:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

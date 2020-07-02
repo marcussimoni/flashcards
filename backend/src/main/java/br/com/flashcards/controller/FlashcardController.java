@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.flashcards.constants.FlashcardsContants;
+import br.com.flashcards.constants.Urls;
 import br.com.flashcards.dto.FlashcardDto;
 import br.com.flashcards.dto.OlderFlashcardDto;
 import br.com.flashcards.exception.FlashcardException;
@@ -30,7 +31,7 @@ import br.com.flashcards.service.FlashcardService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "question", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = Urls.API_BASE + "flashcards", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FlashcardController {
 
 	@Autowired

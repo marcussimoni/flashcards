@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.flashcards.constants.Urls;
 import br.com.flashcards.dto.DeckTestResultDto;
 import br.com.flashcards.dto.ResultDto;
 import br.com.flashcards.dto.TestResultDto;
 import br.com.flashcards.service.DeckTestResultService;
 
 @RestController
-@RequestMapping("test-result")
+@RequestMapping(Urls.API_BASE + "test-result")
 public class TestResultController {
 
 	@Autowired

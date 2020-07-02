@@ -1,6 +1,7 @@
 server:
   port: 8080
-
+  servlet:
+    context-path: /flashcards
 jwt:
   token:
     expiration: 86400000
