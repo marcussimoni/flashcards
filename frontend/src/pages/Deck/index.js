@@ -58,14 +58,15 @@ export class Deck extends Component {
     }
 
     changeListOrder = () => {
-        const urlConfig = this.state.urlConfig();
-        if (urlConfig.url === this.orderByQuestion().url) {
-            this.setState({ urlConfig: this.orderByTimeStamp });
+        let urlConfig
+        
+        if (this.state.urlConfig().url === this.orderByQuestion().url) {
+            urlConfig = this.orderByTimeStamp
+        } else {
+            urlConfig = this.orderByQuestion
         }
-        else {
-            this.setState({ urlConfig: this.orderByQuestion });
-        }
-        this.findAll(urlConfig.url);
+        
+        this.setState({urlConfig}, this.findAll);
     }
 
     componentWillMount(){
@@ -138,7 +139,7 @@ export class Deck extends Component {
                             </button>                    
                         </div>
                         <div className="col-md-6 text-right">
-                            <SortLink onClick={() => this.changeListOrder()}  data-for="sort" data-tip="Change sort of flashcards (ctrl + alt + t)">{this.orderByDescription()}</SortLink>
+                            <SortLink onClick={this.changeListOrder}  data-for="sort" data-tip="Change sort of flashcards (ctrl + alt + t)">{this.orderByDescription()}</SortLink>
                             <ReactTooltip id="sort" delayShow={100} place="top" type="dark" effect="float"/>
                         </div>
                         

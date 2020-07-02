@@ -59,7 +59,7 @@ public class DeckServiceImpl implements DeckService {
 	@Override
 	public List<DeckDto> findAll(Pageable page) {
 		User user = userService.userAuthenticated();
-		return mapper.entityToDto(repository.findAll(user, page));
+		return repository.findAll(user, page);
 	}
 
 	@Override

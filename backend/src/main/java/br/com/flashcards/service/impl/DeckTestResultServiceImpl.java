@@ -113,4 +113,5 @@ public class DeckTestResultServiceImpl implements DeckTestResultService {
 		List<DeckTestResult> result = repository.findAll(user, page);
 		return deckTestResultMapper.entityToDto(result);
 	}
+	
 }

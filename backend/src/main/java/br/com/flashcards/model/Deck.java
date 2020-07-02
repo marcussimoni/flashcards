@@ -2,6 +2,8 @@ package br.com.flashcards.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,6 +30,8 @@ public class Deck implements Serializable {
 		if(Objects.isNull(timeStamp)) {
 			timeStamp = LocalDateTime.now();
 		}
+		
+		flashcards = new ArrayList<Flashcard>();
 		
 	}
 	
@@ -52,5 +57,8 @@ public class Deck implements Serializable {
 	
 	@Column(name = "ACTIVE")
 	private Boolean active = Boolean.TRUE;
+	
+	@OneToMany(mappedBy = "deck")
+	private List<Flashcard> flashcards;
 	
 }

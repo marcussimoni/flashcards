@@ -5,9 +5,9 @@ spring:
   application:
     name: 'flashcards'
   datasource:
-    url: jdbc:postgresql://localhost:5432/flashcards
-    username: postgres
-    password: admin
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5

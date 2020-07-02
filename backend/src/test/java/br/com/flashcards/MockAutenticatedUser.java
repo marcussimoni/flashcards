@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.flashcards.model.User;
 import br.com.flashcards.service.UserService;
 import br.com.flashcards.service.impl.UserServiceImpl;
 

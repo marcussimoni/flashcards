@@ -1,6 +1,7 @@
 package br.com.flashcards.controller;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,12 @@ public class FlashcardController {
 	@CacheEvict(value = FlashcardsContants.QUESTION, allEntries = true)
 	public FlashcardDto save(@RequestBody FlashcardDto dto) throws InterruptedException {
 		return service.save(dto);
+	}
+	
+	@DeleteMapping(path="{id}" ,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@CacheEvict(value = FlashcardsContants.QUESTION, allEntries = true)
+	public void delete(@PathVariable("id") Long id) throws InterruptedException {
+		service.delete(Arrays.asList(id));
 	}
 	
 	@DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
