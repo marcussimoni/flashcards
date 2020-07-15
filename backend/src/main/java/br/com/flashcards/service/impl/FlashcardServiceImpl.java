@@ -195,5 +195,11 @@ public class FlashcardServiceImpl implements FlashcardService {
 	private void inactivateOldFlashcards(List<Long> flashcardsId) {
 		repository.inactivateOldFlashcards(flashcardsId);
 	}
+
+	@Override
+	public Long findTotalOlderThan(LocalDateTime date) {
+		User user = userService.userAuthenticated();
+		return repository.findTotalOlderThan(user, date);
+	}
 	
 }

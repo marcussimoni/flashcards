@@ -17,5 +17,6 @@ public class UserDto implements Serializable {
 	private LocalDate birthDate;
 	private String password;
 	private String username;
+	private TokenDto token;
 	
 }

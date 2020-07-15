@@ -43,5 +43,8 @@ public interface FlashcardRepository extends PagingAndSortingRepository<Flashcar
 	@Modifying
 	@Query("UPDATE Flashcard f SET f.active = false WHERE f.deck = :deck")
 	void inactivateFlashcards(@Param("deck") Deck deck);
+
+	@Query("SELECT COUNT(q) FROM Flashcard q INNER JOIN q.deck d WHERE d.user = :user AND q.timeStamp < :date AND (q.active IS NULL OR q.active = true)")
+	Long findTotalOlderThan(@Param("user") User user, @Param("date") LocalDateTime date);
 	
 }

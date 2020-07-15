@@ -76,6 +76,12 @@ public class FlashcardController {
 		return service.findAllOlderThan(date);
 	}
 	
+	@GetMapping(path = "total-older-flashcards")
+	public Long findTotalOlderThan(){
+		LocalDateTime date = LocalDateTime.now().minusDays(7L);
+		return service.findTotalOlderThan(date);
+	}
+	
 	@PutMapping(path = "older-flashcards")
 	public void removeOldFlashcards(@RequestBody List<OlderFlashcardDto> flashcards){
 		service.removeOldFlashcards(flashcards);

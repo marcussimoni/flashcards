@@ -18,4 +18,8 @@ public interface UserService {
 	
 	User userAuthenticated();
 	
+	UserDto authenticate(UserDto dto);
+
+	Optional<User> findByEmail(String email);
+	
 }

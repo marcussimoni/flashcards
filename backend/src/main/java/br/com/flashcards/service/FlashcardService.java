@@ -21,5 +21,6 @@ public interface FlashcardService {
 	Optional<Flashcard >findById(Long id);
 	List<OlderFlashcardDto> findAllOlderThan(LocalDateTime date);
 	void removeOldFlashcards(List<OlderFlashcardDto> flashcards);
+	Long findTotalOlderThan(LocalDateTime date);
 	
 }
